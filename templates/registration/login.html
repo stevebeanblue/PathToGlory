@@ -1,0 +1,16 @@
+{% extends "shared/layout.html" %}
+{% block title %}
+    Login
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Log In</h2>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn waves-effect waves-light black" type="submit" name="action">Log in
+            <i class="material-icons right">send</i>
+          </button>
+        </form>
+    </div>
+{% endblock %}

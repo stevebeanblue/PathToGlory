@@ -1,0 +1,17 @@
+{% extends "shared/layout.html" %}
+{% block title %}
+    Rosters
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Rosters</h2>
+        {{% for Roster in Rosters %}}
+            <p>{{ Roster.PlayerName }}</p>
+            <p>{{ Roster.ArmyName }}</p>
+            <p>{{ Roster.Faction }}</p>
+            <p>{{ Roster.RealmOfOrigin }}</p>
+            <p>{{ Roster.Subfaction }}</p>
+            <p>{{ Roster.StartingSize }}</p>
+        {{% endfor %}}
+    </div>
+{% endblock %}

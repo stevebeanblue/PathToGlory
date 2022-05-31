@@ -1,0 +1,16 @@
+{% extends "shared/layout.html" %}
+{% block title %}
+    Sign up
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Sign up</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn waves-effect waves-light black" type="submit" name="action">Sign up
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+{% endblock %}
