@@ -15,7 +15,7 @@
         {% endif %}
         <ul>
             {% for Group in PathToGloryGroup %}
-                <li><a href="{% url "groupRosters" Group.pk %}">{{ Group.Description }}</a></li>
+                <li><a href="{% url 'grouprosters' Group.pk %}">{{ Group.Description }}</a></li>
             {% endfor %}
         </ul>
     </div>

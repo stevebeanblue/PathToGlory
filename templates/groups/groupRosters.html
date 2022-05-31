@@ -5,13 +5,17 @@
 {% block content %}
     <div class="container">
         <h2>Rosters</h2>
-        {{% for Roster in Rosters %}}
-            <p>{{ Roster.PlayerName }}</p>
-            <p>{{ Roster.ArmyName }}</p>
-            <p>{{ Roster.Faction }}</p>
-            <p>{{ Roster.RealmOfOrigin }}</p>
-            <p>{{ Roster.Subfaction }}</p>
-            <p>{{ Roster.StartingSize }}</p>
-        {{% endfor %}}
+        {% for Roster in Rosters %}
+            <p>Player Name: {{ Roster.PlayerName }}</p>
+            <p>ArmyName: {{ Roster.ArmyName }}</p>
+            <p>Faction: {{ Roster.Faction }}</p>
+            <p>Realm Of Origin: {{ Roster.RealmOfOrigin }}</p>
+            <p>Subfaction: {{ Roster.Subfaction }}</p>
+            <p>Starting Size: {{ Roster.StartingSize }} pts</p>
+            <p>Date Created: {{ Roster.DateCreated }}</p>
+            <p>Completed: {{ Roster.IsCompleted }}</p>
+            <p>Current Glory: {{ Roster.Glory }}</p>
+            <hr/>
+        {% endfor %}
     </div>
 {% endblock %}
