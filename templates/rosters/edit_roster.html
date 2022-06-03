@@ -1,0 +1,15 @@
+{% extends "shared/layout.html" %}
+{% load material_form %}
+{% block title %}
+    Edit Roster
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Edit this Roster</h2>
+        <form action = "" method = "post">
+            {% csrf_token %}
+            {% form form=form %}{% endform %}
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+{% endblock %}

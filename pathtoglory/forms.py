@@ -1,14 +1,9 @@
 from django.forms import ModelForm
-from pathtoglory.models import PathToGloryGroup, Rosters
+from pathtoglory.models import Roster
 
-
-class HomeForm(ModelForm):
+class CreateRosterForm(ModelForm):
     class Meta:
-        model = PathToGloryGroup
-        fields = '__all__'
+        model = Roster
+        exclude = ("User", "DateCreated")
 
 
-class GroupRostersForm(ModelForm):
-    class Meta:
-        model = Rosters
-        fields = '__all__'

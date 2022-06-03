@@ -24,4 +24,6 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("", views.home, name="home"),
     path("grouprosters/<int:group_id>", views.grouprosters, name="grouprosters"),
+    path("editroster/<int:roster_id>", views.editroster, name="editroster"),
+    path("createroster/", views.createroster, name="createroster"),
 ]
