@@ -15,7 +15,9 @@
             <p>Date Created: {{ Roster.DateCreated }}</p>
             <p>Completed: {{ Roster.IsCompleted }}</p>
             <p>Current Glory: {{ Roster.Glory }}</p>
-            <a href="{% url 'editroster' Roster.pk %}">Edit</a>
+            {% if user.is_authenticated and request.user.id == Roster.User.id %}
+                <a href="{% url 'editroster' Roster.pk %}">Edit</a>
+            {% endif %}
             <hr/>
         {% endfor %}
     </div>
