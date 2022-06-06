@@ -6,6 +6,7 @@
 {% block content %}
     <div class="container">
         <h2>Edit this Roster</h2>
+        <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
         <form action = "" method = "post">
             {% csrf_token %}
             {% form form=form %}{% endform %}
