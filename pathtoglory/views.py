@@ -16,6 +16,7 @@ def createroster(request):
         return render(request, "rosters/create_roster.html", {"form": CreateRosterForm()})
 
 def editroster(request, roster_id):
+    #add check to see if the person logged in is the person that created the roster
     roster = Roster.objects.get(pk=int(roster_id))
     if request.method == 'GET':
         form = CreateRosterForm(instance=roster)
