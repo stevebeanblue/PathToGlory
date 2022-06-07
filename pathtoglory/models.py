@@ -24,6 +24,81 @@ class Achievements(models.Model):
     VictoriesWon = models.IntegerField()
     EnemyHereosSlain = models.IntegerField()
 
+class BonusArtifactsOfPower(models.Model):
+    Name = models.TextField()
+
+class BonusUniqueEnhancements(models.Model):
+    Name = models.TextField()
+
+class BonusSpells(models.Model):
+    Name = models.TextField()
+
+class BonusPrayers(models.Model):
+    Name = models.TextField()
+
+class EndlessSpellsAndInvocations(models.Model):
+    Name = models.TextField()
+
+class Battalions(models.Model):
+    Name = models.TextField()
+
+class TheVault(models.Model):
+    Triumph = models.TextField()
+    BonusArtifactsOfPower = models.ForeignKey(
+        BonusArtifactsOfPower,
+        on_delete=models.CASCADE
+    )
+    BonusUniqueEnhancements = models.ForeignKey(
+        BonusUniqueEnhancements,
+        on_delete=models.CASCADE
+    )
+    BonusSpells = models.ForeignKey(
+        BonusSpells,
+        on_delete=models.CASCADE
+    )
+    BonusPrayers = models.ForeignKey(
+        BonusPrayers,
+        on_delete=models.CASCADE
+    )
+    EndlessSpellsAndInvocations = models.ForeignKey(
+        EndlessSpellsAndInvocations,
+        on_delete=models.CASCADE
+    )
+    Battalions = models.ForeignKey(
+        Battalions,
+        on_delete=models.CASCADE
+    )
+
+
+class StrongholdTerritories(models.Model):
+    Name = models.TextField()
+    TerritoryType = models.TextField()
+    Upgraded = models.BooleanField(default=False)
+
+class ImposingStrongHoldTerritories(models.Model):
+    Name = models.TextField()
+    TerritoryType = models.TextField()
+    Upgraded = models.BooleanField(default=False)
+
+class MightyStrongholdTerritories(models.Model):
+    Name = models.TextField()
+    TerritoryType = models.TextField()
+    Upgraded = models.BooleanField(default=False)
+
+class Territories(models.Model):
+    StrongholdTerritories = models.ForeignKey(
+        StrongholdTerritories,
+        on_delete=models.CASCADE
+    )
+    ImposingStrongHoldTerritories = models.ForeignKey(
+        ImposingStrongHoldTerritories,
+        on_delete=models.CASCADE
+    )
+    MightyStrongholdTerritories = models.ForeignKey(
+        MightyStrongholdTerritories,
+        on_delete=models.CASCADE
+    )
+
 class Roster(models.Model):
     Group_id = models.ForeignKey(
         PathToGloryGroup,
@@ -35,14 +110,30 @@ class Roster(models.Model):
     ArmyName = models.TextField()
     Subfaction = models.TextField()
     StartingSize = models.IntegerField()
-    User = models.ForeignKey(
+    User = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
     )
-    IsCompleted = models.BooleanField(default=False)
+    Completed = models.BooleanField(default=False)
     DateCreated = models.DateField()
     Glory = models.IntegerField(default=0)
-    QuestLog = models.ForeignKey(
+    QuestLog = models.OneToOneField(
         QuestLog,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+    )
+    Stronghold = models.OneToOneField(
+        Stronghold,
+        on_delete=models.CASCADE,
+    )
+    Achievements = models.OneToOneField(
+        Achievements,
+        on_delete=models.CASCADE,
+    )
+    Vault = models.OneToOneField(
+        TheVault,
+        on_delete=models.CASCADE,
+    )
+    Territories = models.OneToOneField(
+        Territories,
+        on_delete=models.CASCADE,
     )

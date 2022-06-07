@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from pathtoglory.models import Roster
+from pathtoglory.models import *
 
 class CreateRosterForm(ModelForm):
     class Meta:
