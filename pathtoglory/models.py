@@ -7,6 +7,11 @@ class PathToGloryGroup(models.Model):
     def __str__(self):
         return self.Description
 
+class QuestLog(models.Model):
+    CurrentQuest = models.TextField()
+    QuestReward = models.TextField()
+    QuestProgress = models.TextField()
+
 class Roster(models.Model):
     Group_id = models.ForeignKey(
         PathToGloryGroup,
@@ -23,3 +28,8 @@ class Roster(models.Model):
     IsCompleted = models.BooleanField(default=False)
     DateCreated = models.DateField()
     Glory = models.IntegerField(default=0)
+    QuestLog = models.OneToOneField(
+        QuestLog,
+        on_delete=models.CASCADE,
+        default=QuestLog.objects.create
+    )
