@@ -1,15 +1,16 @@
 {% extends "shared/layout.html" %}
 {% load material_form %}
 {% block title %}
-    Create Roster
+    Create QuestLog
 {% endblock %}
 {% block content %}
     <div class="container">
-        <h2>Create a Roster</h2>
+        <h2>Create a QuestLog</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
         <form action = "" method = "post">
             {% csrf_token %}
             {% form form=form %}{% endform %}
+            <p>Roster {{ RosterId }}</p>
             <button class="btn waves-effect waves-light black" type="submit" name="Create">Create
                 <i class="material-icons right">create</i>
             </button>

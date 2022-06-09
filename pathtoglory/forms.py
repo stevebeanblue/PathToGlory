@@ -6,4 +6,9 @@ class CreateRosterForm(ModelForm):
         model = Roster
         exclude = ("User", "DateCreated")
 
+class QuestLogForm(ModelForm):
+    class Meta:
+        model = QuestLog
+        exclude = ("RosterId",)
+
 

@@ -92,7 +92,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='QuestLog',
+            name='questlog',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('CurrentQuest', models.TextField()),
@@ -156,7 +156,7 @@ class Migration(migrations.Migration):
                 ('Glory', models.IntegerField(default=0)),
                 ('Achievements', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='pathtoglory.achievements')),
                 ('Group_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pathtoglory.pathtoglorygroup')),
-                ('QuestLog', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='pathtoglory.questlog')),
+                ('questlog', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='pathtoglory.questlog')),
                 ('Stronghold', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='pathtoglory.stronghold')),
                 ('Territories', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='pathtoglory.territories')),
                 ('User', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
