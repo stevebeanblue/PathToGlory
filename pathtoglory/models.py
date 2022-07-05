@@ -1,17 +1,20 @@
 from django.conf import settings
 from django.db import models
 
+
 class PathToGloryGroup(models.Model):
     Description = models.TextField()
 
     def __str__(self):
         return self.Description
 
+
 class QuestLog(models.Model):
     RosterId = models.IntegerField(default=0)
     CurrentQuest = models.TextField()
     QuestReward = models.TextField()
     QuestProgress = models.TextField()
+
 
 class Stronghold(models.Model):
     RosterId = models.IntegerField(default=0)
@@ -20,6 +23,7 @@ class Stronghold(models.Model):
     Imposing = models.BooleanField(default=False)
     Mighty = models.BooleanField(default=False)
 
+
 class Achievements(models.Model):
     RosterId = models.IntegerField(default=0)
     BattlesFought = models.IntegerField()
@@ -27,23 +31,30 @@ class Achievements(models.Model):
     VictoriesWon = models.IntegerField()
     EnemyHereosSlain = models.IntegerField()
 
+
 class BonusArtifactsOfPower(models.Model):
     Name = models.TextField()
+
 
 class BonusUniqueEnhancements(models.Model):
     Name = models.TextField()
 
+
 class BonusSpells(models.Model):
     Name = models.TextField()
+
 
 class BonusPrayers(models.Model):
     Name = models.TextField()
 
+
 class EndlessSpellsAndInvocations(models.Model):
     Name = models.TextField()
 
+
 class Battalions(models.Model):
     Name = models.TextField()
+
 
 class TheVault(models.Model):
     RosterId = models.IntegerField(default=0)
@@ -80,17 +91,20 @@ class StrongholdTerritories(models.Model):
     TerritoryType = models.TextField()
     Upgraded = models.BooleanField(default=False)
 
+
 class ImposingStrongHoldTerritories(models.Model):
     TerritoriesId = models.IntegerField(default=0)
     Name = models.TextField()
     TerritoryType = models.TextField()
     Upgraded = models.BooleanField(default=False)
 
+
 class MightyStrongholdTerritories(models.Model):
     TerritoriesId = models.IntegerField(default=0)
     Name = models.TextField()
     TerritoryType = models.TextField()
     Upgraded = models.BooleanField(default=False)
+
 
 class Roster(models.Model):
     Group_id = models.ForeignKey(
@@ -103,13 +117,11 @@ class Roster(models.Model):
     ArmyName = models.TextField()
     Subfaction = models.TextField()
     StartingSize = models.IntegerField()
-    User = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE
-    )
-    Glory = models.IntegerField(default=0)
+    User_id = models.IntegerField(default=0)
+    Glory = models.IntegerField()
     Completed = models.BooleanField(default=False)
     DateCreated = models.DateField()
+
 
 class Territories(models.Model):
     RosterId = models.IntegerField(default=0)
@@ -125,6 +137,7 @@ class Territories(models.Model):
         MightyStrongholdTerritories,
         on_delete=models.CASCADE
     )
+
 
 class TheVault(models.Model):
     RosterId = models.IntegerField(default=0)
@@ -153,4 +166,3 @@ class TheVault(models.Model):
         Battalions,
         on_delete=models.CASCADE
     )
-

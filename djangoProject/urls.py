@@ -27,4 +27,6 @@ urlpatterns = [
     path("editroster/<int:roster_id>", views.editroster, name="editroster"),
     path("createroster/", views.createroster, name="createroster"),
     path("createquestlog/<int:roster_id>", views.createquestlog, name="createquestlog"),
+    path("editquestlog/<int:quest_id>/<int:roster_id>", views.edit_quest_log, name="editquestlog"),
+    path("deletequestlog/<int:quest_id>/<int:roster_id>", views.delete_quest_log, name="deletequestlog"),
 ]

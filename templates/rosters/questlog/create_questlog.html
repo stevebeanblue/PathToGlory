@@ -5,15 +5,46 @@
 {% endblock %}
 {% block content %}
     <div class="container">
-        <h2>Create a QuestLog</h2>
+        <h2>Quest Log</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
-        <form action = "" method = "post">
-            {% csrf_token %}
-            {% form form=form %}{% endform %}
-            <p>Roster {{ RosterId }}</p>
-            <button class="btn waves-effect waves-light black" type="submit" name="Create">Create
-                <i class="material-icons right">create</i>
-            </button>
-        </form>
+        <div class="row">
+            <div class="col s6">
+                {% if isEdit == "True" %}
+                    <h3>Edit Quest</h3>
+                {% else %}
+                    <h3>Create a Quest</h3>
+                {% endif %}
+                <form action = "" method = "post">
+                    <p>{{ form.errors }}</p>
+                    {% csrf_token %}
+                    {% form form=form %}{% endform %}
+                    {% if isEdit == "True" %}
+                        <button class="btn waves-effect waves-light black" type="submit" name="Save">Save
+                            <i class="material-icons right">save</i>
+                        </button>
+                    {% else %}
+                        <button class="btn waves-effect waves-light black" type="submit" name="Create">Create
+                            <i class="material-icons right">create</i>
+                        </button>
+                    {% endif %}
+                </form>
+            </div>
+            <div class="col s6 right-align">
+                <h3>Quests</h3>
+                {% if quests %}
+                    {% for quest in quests %}
+                        <p>Current Quest: {{ quest.CurrentQuest }}</p>
+                        <p>Quest Reward: {{ quest.QuestReward }}</p>
+                        <p>Quest Progress: {{ quest.QuestProgress }}</p>
+                        <a href="{% url 'editquestlog' quest.pk quest.RosterId %}">Edit</a>
+                        <a href="{% url 'deletequestlog' quest.pk quest.RosterId %}">Delete</a>
+                        <hr/>
+                    {% endfor %}
+                {% else %}
+                    <p>You have no current Quests</p>
+                {% endif %}
+            </div>
+        </div>
+
     </div>
 {% endblock %}
