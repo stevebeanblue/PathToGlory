@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from datetime import datetime
-from .models import PathToGloryGroup, Roster, QuestLog
-from .forms import CreateRosterForm, QuestLogForm
+from .models import PathToGloryGroup, Roster, QuestLog, Stronghold, Achievements
+from .forms import CreateRosterForm, QuestLogForm, StrongholdForm, AchievementsForm
 from .helpers.paths import Paths
 
 
@@ -61,7 +61,6 @@ def createquestlog(request, roster_id):
                        "RosterId": roster_id,
                        "quests": quests})
     else:
-        # add validation to only be able to have one quest per roster
         update_request = request.POST.copy()
         update_request.update({'RosterId': roster_id})
         form = QuestLogForm(update_request)
@@ -73,31 +72,93 @@ def createquestlog(request, roster_id):
     return render(request, Paths.create_quest_log, {"form": form, "RosterId": roster_id, "quests": quests})
 
 
-def edit_quest_log(request, quest_id, roster_id):
-    html_file_path = Paths.create_quest_log
+def edit_quest_log(request, quest_id):
     quest = QuestLog.objects.get(pk=quest_id)
     form = QuestLogForm(instance=quest)
-    quests = list(QuestLog.objects.filter(RosterId=roster_id))
-    is_edit = "True"
 
     if request.method == 'POST':
         instance = get_object_or_404(QuestLog, id=quest_id)
         form = QuestLogForm(request.POST or None, instance=instance)
         if form.is_valid():
-            is_edit = "False"
             form.save()
-            form = CreateRosterForm()
-            html_file_path = Paths.edit_roster
+            return redirect('createquestlog', roster_id=quest.RosterId)
 
-    return render(request, html_file_path,
-                  {"form": form, "RosterId": roster_id, "quests": quests, "isEdit": is_edit})
+    return render(request, Paths.edit_quest_log,
+                  {"form": form, "RosterId": quest.RosterId})
 
 
-def delete_quest_log(request, quest_id, roster_id):
+def delete_quest_log(request, quest_id):
+    quest = QuestLog.objects.get(pk=quest_id)
+    roster_id = quest.RosterId
+
     if request.method == 'GET':
-        QuestLog.objects.filter(pk=quest_id).delete()
+        quest.delete()
 
-    return render(request, Paths.edit_roster, {"RosterId": roster_id, })
+    return redirect('createquestlog', roster_id=roster_id)
 
 
+def createstronghold(request, roster_id):
+    form = StrongholdForm()
 
+    if request.method == 'POST':
+        update_request = request.POST.copy()
+        update_request.update({'RosterId': roster_id})
+        form = StrongholdForm(update_request)
+        if form.is_valid():
+            form.save()
+            form = StrongholdForm()
+
+    strongholds = list(Stronghold.objects.filter(RosterId=roster_id))
+
+    return render(request, Paths.create_stronghold, {"form": form, "RosterId": roster_id, "strongholds": strongholds})
+
+
+def edit_stronghold(request, stronghold_id):
+    stronghold = Stronghold.objects.get(pk=stronghold_id)
+    form = StrongholdForm(instance=stronghold)
+
+    if request.method == 'POST':
+        instance = get_object_or_404(Stronghold, id=stronghold_id)
+        form = StrongholdForm(request.POST or None, instance=instance)
+        if form.is_valid():
+            form.save()
+            return redirect('createstronghold', roster_id=stronghold.RosterId)
+
+    return render(request, Paths.edit_stronghold,
+                  {"form": form, "RosterId": stronghold.RosterId})
+
+
+def delete_stronghold(request, stronghold_id):
+    stronghold = Stronghold.objects.get(pk=stronghold_id)
+    roster_id = stronghold.RosterId
+
+    if request.method == 'GET':
+        stronghold.delete()
+
+    return redirect('createstronghold', roster_id)
+
+
+def create_achievements(request, roster_id):
+    instance = Achievements.get_achievement(roster_id)
+
+    if instance:
+        if len(instance) > 1:
+            return redirect('home')
+        form = AchievementsForm(instance=instance[0])
+    else:
+        form = AchievementsForm()
+
+    if request.method == 'POST':
+
+        achievement = Achievements.get_achievement(roster_id)
+
+        if achievement:
+            form = AchievementsForm(request.POST or None, instance=achievement[0])
+            update_request = request.POST.copy()
+            update_request.update({'RosterId': roster_id})
+
+        if form.is_valid():
+            form.save()
+
+    return render(request, Paths.create_achievement,
+                  {"form": form, "RosterId": roster_id})

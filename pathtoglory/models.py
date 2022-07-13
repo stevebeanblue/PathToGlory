@@ -31,6 +31,9 @@ class Achievements(models.Model):
     VictoriesWon = models.IntegerField()
     EnemyHereosSlain = models.IntegerField()
 
+    def get_achievement(self, roster_id):
+        return self.objects.filter(RosterId=roster_id)
+
 
 class BonusArtifactsOfPower(models.Model):
     Name = models.TextField()
@@ -135,34 +138,5 @@ class Territories(models.Model):
     )
     MightyStrongholdTerritories = models.ForeignKey(
         MightyStrongholdTerritories,
-        on_delete=models.CASCADE
-    )
-
-
-class TheVault(models.Model):
-    RosterId = models.IntegerField(default=0)
-    Triumph = models.TextField()
-    BonusArtifactsOfPower = models.ForeignKey(
-        BonusArtifactsOfPower,
-        on_delete=models.CASCADE
-    )
-    BonusUniqueEnhancements = models.ForeignKey(
-        BonusUniqueEnhancements,
-        on_delete=models.CASCADE
-    )
-    BonusSpells = models.ForeignKey(
-        BonusSpells,
-        on_delete=models.CASCADE
-    )
-    BonusPrayers = models.ForeignKey(
-        BonusPrayers,
-        on_delete=models.CASCADE
-    )
-    EndlessSpellsAndInvocations = models.ForeignKey(
-        EndlessSpellsAndInvocations,
-        on_delete=models.CASCADE
-    )
-    Battalions = models.ForeignKey(
-        Battalions,
         on_delete=models.CASCADE
     )

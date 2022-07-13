@@ -13,9 +13,6 @@
                     {% csrf_token %}
                     {% form form=form %}{% endform %}
                 </div>
-                <div class="col s6">
-                    <a href="{% url 'createquestlog' RosterId %}">QuestLog</a>
-                </div>
             </div>
             <button class="btn waves-effect waves-light black" type="submit" name="Save">Save
                 <i class="material-icons right">save</i>

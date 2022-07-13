@@ -1,0 +1,48 @@
+{% extends "shared/layout.html" %}
+{% load material_form %}
+{% block title %}
+    Create Quest Log
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Quest Log</h2>
+        <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
+        <div class="row">
+            {% if user.is_authenticated %}
+                <div class="col s6">
+                    <h3>Create a Quest</h3>
+                    <form action = "" method = "post">
+                        <p>{{ form.errors }}</p>
+                        {% csrf_token %}
+                        {% form form=form %}{% endform %}
+                        <button class="btn waves-effect waves-light black" type="submit" name="Create">Create
+                            <i class="material-icons right">create</i>
+                        </button>
+                    </form>
+                </div>
+            {% endif %}
+            <div class="col s6 right-align">
+                <h3>Quests</h3>
+                {% if quests %}
+                    <ul class="collapsible popout">
+                        {% for quest in quests %}
+                            <li>
+                              <div class="collapsible-header"><i class="material-icons">explore</i>Current Quest: {{ quest.CurrentQuest }}</div>
+                              <div class="collapsible-body">
+                                  <span><p>Quest Reward: {{ quest.QuestReward }}</p></span>
+                                  <span><p>Quest Progress: {{ quest.QuestProgress }}</p></span>
+                                  {% if user.is_authenticated %}
+                                    <span><a href="{% url 'editquestlog' quest.pk %}">Edit</a></span>
+                                    <span><a href="{% url 'deletequestlog' quest.pk %}">Delete</a></span>
+                                  {% endif %}
+                              </div>
+                            </li>
+                        {% endfor %}
+                      </ul>
+                {% else %}
+                    <p>You have no current Quests</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

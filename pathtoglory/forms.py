@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from pathtoglory.models import Roster, QuestLog
+from pathtoglory.models import Roster, QuestLog, Stronghold, Achievements
 
 
 class CreateRosterForm(ModelForm):
@@ -20,14 +20,12 @@ class CreateRosterForm(ModelForm):
             'DateCreated'
         }
         widgets = {
-             'PlayerName': forms.HiddenInput(),
-             'User_id': forms.HiddenInput(),
-             'DateCreated': forms.HiddenInput(),
-             'Completed': forms.HiddenInput(),
-         }
+            'PlayerName': forms.HiddenInput(),
+            'User_id': forms.HiddenInput(),
+            'DateCreated': forms.HiddenInput(),
+            'Completed': forms.HiddenInput(),
+        }
 
-
-# need to create editRosterForm with completed field or just remove from above
 
 class QuestLogForm(ModelForm):
     class Meta:
@@ -37,6 +35,35 @@ class QuestLogForm(ModelForm):
             'CurrentQuest',
             'QuestReward',
             'QuestProgress',
+        }
+        widgets = {
+            'RosterId': forms.HiddenInput(),
+        }
+
+
+class StrongholdForm(ModelForm):
+    class Meta:
+        model = Stronghold
+        fields = {
+            'RosterId',
+            'Name',
+            'Barracks',
+            'Imposing',
+            'Mighty',
+        }
+        widgets = {
+            'RosterId': forms.HiddenInput(),
+        }
+
+class AchievementsForm(ModelForm):
+    class Meta:
+        model = Achievements
+        fields = {
+            'RosterId',
+            'BattlesFought',
+            'QuestCompleted',
+            'VictoriesWon',
+            'EnemyHereosSlain',
         }
         widgets = {
             'RosterId': forms.HiddenInput(),

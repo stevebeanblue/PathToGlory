@@ -1,0 +1,29 @@
+{% extends "shared/layout.html" %}
+{% load material_form %}
+{% block title %}
+    Achievements
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Achievements</h2>
+        <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
+        <div class="row">
+            {% if user.is_authenticated %}
+                <div class="col s6">
+                    <h3>Create an achievement</h3>
+                    <form action = "" method = "post">
+                        <p>{{ form.errors }}</p>
+                        {% csrf_token %}
+                        {% form form=form %}{% endform %}
+                        <button class="btn waves-effect waves-light black" type="submit" name="Create">Create
+                            <i class="material-icons right">create</i>
+                        </button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+
+
