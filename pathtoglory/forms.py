@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from pathtoglory.models import Roster, QuestLog, Stronghold, Achievements
+from pathtoglory.models import Roster, QuestLog, Stronghold, Achievements, BonusArtifactsOfPower
 
 
 class CreateRosterForm(ModelForm):
@@ -17,13 +17,15 @@ class CreateRosterForm(ModelForm):
             'User_id',
             'Glory',
             'Completed',
-            'DateCreated'
+            'DateCreated',
+            'Group_id_as_int',
         }
         widgets = {
             'PlayerName': forms.HiddenInput(),
             'User_id': forms.HiddenInput(),
             'DateCreated': forms.HiddenInput(),
             'Completed': forms.HiddenInput(),
+            'Group_id_as_int': forms.HiddenInput(),
         }
 
 
@@ -55,6 +57,7 @@ class StrongholdForm(ModelForm):
             'RosterId': forms.HiddenInput(),
         }
 
+
 class AchievementsForm(ModelForm):
     class Meta:
         model = Achievements
@@ -67,4 +70,16 @@ class AchievementsForm(ModelForm):
         }
         widgets = {
             'RosterId': forms.HiddenInput(),
+        }
+
+
+class BonusArtifactsOfPowerForm(ModelForm):
+    class Meta:
+        model = BonusArtifactsOfPower
+        fields = {
+            'Name',
+            'Roster_Id',
+        }
+        widgets = {
+            'Roster_Id': forms.HiddenInput()
         }

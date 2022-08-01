@@ -1,6 +1,7 @@
 class Paths:
     group_rosters = "groups/groupRosters.html"
     home = "home.html"
+    the_vault = "thevault/vault.html"
     # region roster
     create_roster = "rosters/create_roster.html"
     edit_roster = "rosters/edit_roster.html"
@@ -16,3 +17,9 @@ class Paths:
     # region achievements
     create_achievement = "achievements/create_achievement.html"
     edit_achievement = "achievements/edit_achievement.html"
+    view_achievement = "achievements/view_achievement.html"
+    # endregion
+    # region bonusartifactsofpower
+    bonusartifactsofpower = "bonusartifactsofpower/create_bonusartifactsofpower.html"
+    editbonusartifactsofpower = "editbonusartifactsofpower/edit_bonusartifactsofpower.html"
+    # endregion

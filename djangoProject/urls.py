@@ -23,19 +23,32 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),  # new
     path("accounts/", include("django.contrib.auth.urls")),
     path("", views.home, name="home"),
-    path("grouprosters/<int:group_id>", views.grouprosters, name="grouprosters"),
+    path("thevault/<int:roster_id>/", views.the_vault, name="thevault"),
+    # region roster
+    path("grouprosters/<int:group_id>/", views.grouprosters, name="grouprosters"),
     path("editroster/<int:roster_id>", views.editroster, name="editroster"),
     path("createroster/", views.createroster, name="createroster"),
-    # quests
+    # endregion
+    # region quests
     path("createquestlog/<int:roster_id>/", views.createquestlog, name="createquestlog"),
     path("editquestlog/<int:quest_id>/", views.edit_quest_log, name="editquestlog"),
     path("deletequestlog/<int:quest_id>/", views.delete_quest_log, name="deletequestlog"),
-    # strongholds
+    # endregion
+    # region strongholds
     path("createstronghold/<int:roster_id>", views.createstronghold, name="createstronghold"),
     path("editstronghold/<int:stronghold_id>/", views.edit_stronghold, name="editstronghold"),
     path("deletestronghold/<int:stronghold_id>/",
          views.delete_stronghold, name="deletestronghold"),
-    # achievements
+    # endregion
+    # region achievements
     path("achievements/<int:roster_id>", views.create_achievements, name="createachievements"),
+    path("achievement/<int:roster_id>", views.view_achievement, name="viewachievement"),
+    path("editachievements/<int:roster_id>", views.edit_achievements, name="editachievements"),
+    # endregion
+    # region bonus artifacts of power
+    path("bonusartifactsofpower/<int:roster_id>", views.bonus_artifacts_of_power, name="artifactofpower"),
+    path("editbonusartifactsofpower/<int:power_id>", views.edit_bonus_artifacts_of_power, name="editartifactofpower"),
+    path("deletebonusartifactsofpower/<int:power_id>/",
+         views.delete_bonus_artifacts_of_power, name="deletebonusartifactsofpower")
+    # endregion
 ]
-

@@ -24,39 +24,34 @@ class Stronghold(models.Model):
     Mighty = models.BooleanField(default=False)
 
 
-class Achievements(models.Model):
-    RosterId = models.IntegerField(default=0)
-    BattlesFought = models.IntegerField()
-    QuestCompleted = models.IntegerField()
-    VictoriesWon = models.IntegerField()
-    EnemyHereosSlain = models.IntegerField()
-
-    def get_achievement(self, roster_id):
-        return self.objects.filter(RosterId=roster_id)
-
-
 class BonusArtifactsOfPower(models.Model):
     Name = models.TextField()
+    Roster_Id = models.IntegerField(default=0)
 
 
 class BonusUniqueEnhancements(models.Model):
     Name = models.TextField()
+    Roster_Id = models.IntegerField(default=0)
 
 
 class BonusSpells(models.Model):
     Name = models.TextField()
+    Roster_Id = models.IntegerField(default=0)
 
 
 class BonusPrayers(models.Model):
     Name = models.TextField()
+    Roster_Id = models.IntegerField(default=0)
 
 
 class EndlessSpellsAndInvocations(models.Model):
     Name = models.TextField()
+    Roster_Id = models.IntegerField(default=0)
 
 
 class Battalions(models.Model):
     Name = models.TextField()
+    Roster_Id = models.IntegerField(default=0)
 
 
 class TheVault(models.Model):
@@ -114,6 +109,7 @@ class Roster(models.Model):
         PathToGloryGroup,
         on_delete=models.CASCADE
     )
+    Group_id_as_int = models.IntegerField(default=0)
     PlayerName = models.TextField()
     Faction = models.TextField()
     RealmOfOrigin = models.TextField()
@@ -124,6 +120,14 @@ class Roster(models.Model):
     Glory = models.IntegerField()
     Completed = models.BooleanField(default=False)
     DateCreated = models.DateField()
+
+
+class Achievements(models.Model):
+    RosterId = models.OneToOneField(Roster, on_delete=models.CASCADE, default=0)
+    BattlesFought = models.IntegerField(default=0)
+    QuestCompleted = models.IntegerField(default=0)
+    VictoriesWon = models.IntegerField(default=0)
+    EnemyHereosSlain = models.IntegerField(default=0)
 
 
 class Territories(models.Model):

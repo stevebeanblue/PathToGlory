@@ -1,20 +1,17 @@
 {% extends "shared/layout.html" %}
 {% load material_form %}
 {% block title %}
-    Create Quest Log
+    Bonus artifacts of power
 {% endblock %}
 {% block content %}
     <div class="container">
-        <h2>Quest Log</h2>
+        <h2>Bonus artifacts of power</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
         <div class="row">
             {% if user.is_authenticated %}
                 <div class="col s6">
-                    <h3>Create a Quest</h3>
                     {% csrf_token %}
-                    <form action = "" method = "post">
-                        <p>{{ form.errors }}</p>
-                        {% csrf_token %}
+                    <form method = "post">
                         {% form form=form %}{% endform %}
                         <button class="btn waves-effect waves-light black" type="submit" name="Create">Create
                             <i class="material-icons right">create</i>
@@ -22,26 +19,25 @@
                     </form>
                 </div>
             {% endif %}
-            <div class="col s6 right-align">
-                <h3>Quests</h3>
-                {% if quests %}
+            <div class="col s6">
+                {% if powers %}
                     <ul class="collapsible popout">
-                        {% for quest in quests %}
+                        {% for power in powers %}
                             <li>
-                              <div class="collapsible-header"><i class="material-icons">explore</i>Current Quest: {{ quest.CurrentQuest }}</div>
+                              <div class="collapsible-header"><i class="material-icons">explore</i>Artifact of power: {{ power.Name }}</div>
                               <div class="collapsible-body">
                                   <span><p>Quest Reward: {{ quest.QuestReward }}</p></span>
                                   <span><p>Quest Progress: {{ quest.QuestProgress }}</p></span>
                                   {% if user.is_authenticated %}
-                                    <span><a href="{% url 'editquestlog' quest.pk %}">Edit</a></span>
-                                    <span><a href="{% url 'deletequestlog' quest.pk %}">Delete</a></span>
+                                    <span><a href="{% url 'editartifactofpower' power.pk %}">Edit</a></span>
+                                    <span><a href="{% url 'deleteartifactofpower' power.pk %}">Delete</a></span>
                                   {% endif %}
                               </div>
                             </li>
                         {% endfor %}
                       </ul>
                 {% else %}
-                    <p>You have no current Quests</p>
+                    <p>You have no artifacts of power</p>
                 {% endif %}
             </div>
         </div>

@@ -1,0 +1,29 @@
+{% extends "shared/layout.html" %}
+{% load material_form %}
+{% block title %}
+    The Vault
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>The Vault</h2>
+        <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
+        <table class="responsive-table">
+            <thead>
+              <tr>
+                  <th>Bonus Artefacts of Power</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% write a foreach loop  %}
+              <tr>
+                <td>Alvin</td>
+                <td>Eclair</td>
+              </tr>
+              <tr>
+                <td>Alvin</td>
+                <td>Eclair</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

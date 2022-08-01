@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from datetime import datetime
-from .models import PathToGloryGroup, Roster, QuestLog, Stronghold, Achievements
-from .forms import CreateRosterForm, QuestLogForm, StrongholdForm, AchievementsForm
+from .models import PathToGloryGroup, Roster, QuestLog, Stronghold, Achievements, BonusArtifactsOfPower, TheVault
+from .forms import CreateRosterForm, QuestLogForm, StrongholdForm, AchievementsForm, BonusArtifactsOfPowerForm
 from .helpers.paths import Paths
 
 
@@ -22,7 +22,8 @@ def createroster(request):
         return render(request, Paths.create_roster, {"form": form})
     else:
         update_request = request.POST.copy()
-        update_request.update({'User_id': request.user.id, 'DateCreated': datetime.now(), 'PlayerName': request.user})
+        update_request.update({'User_id': request.user.id, 'DateCreated': datetime.now(), 'PlayerName': request.user,
+                               'Group_id_as_int': request.POST.get("Group_id")})
         form = CreateRosterForm(update_request)
         if form.is_valid():
             form.save()
@@ -139,26 +140,93 @@ def delete_stronghold(request, stronghold_id):
 
 
 def create_achievements(request, roster_id):
-    instance = Achievements.get_achievement(roster_id)
+    form = AchievementsForm()
+
+    instance = Achievements.objects.filter(RosterId=roster_id)
 
     if instance:
-        if len(instance) > 1:
-            return redirect('home')
-        form = AchievementsForm(instance=instance[0])
-    else:
-        form = AchievementsForm()
+        return redirect('viewachievement', roster_id)
 
     if request.method == 'POST':
-
-        achievement = Achievements.get_achievement(roster_id)
-
-        if achievement:
-            form = AchievementsForm(request.POST or None, instance=achievement[0])
-            update_request = request.POST.copy()
-            update_request.update({'RosterId': roster_id})
-
+        update_request = request.POST.copy()
+        update_request.update({'RosterId': roster_id})
+        form = AchievementsForm(update_request)
         if form.is_valid():
             form.save()
+            roster = Roster.objects.get(pk=roster_id)
+            return redirect('grouprosters', group_id=roster.Group_id_as_int)
 
     return render(request, Paths.create_achievement,
                   {"form": form, "RosterId": roster_id})
+
+
+def view_achievement(request, roster_id):
+    instance = Achievements.objects.get(RosterId=roster_id)
+
+    if instance:
+        form = AchievementsForm(instance=instance)
+
+    return render(request, Paths.view_achievement, {"form": form})
+
+
+def edit_achievements(request, roster_id):
+    achievement = Achievements.objects.get(RosterId=roster_id)
+    form = AchievementsForm(instance=achievement)
+
+    if request.method == 'POST':
+        instance = get_object_or_404(Achievements, RosterId=roster_id)
+        form = AchievementsForm(request.POST or None, instance=instance)
+        if form.is_valid():
+            form.save()
+            roster = Roster.objects.get(pk=roster_id)
+            return redirect('grouprosters', group_id=roster.Group_id_as_int)
+            return redirect('createstronghold', roster_id=stronghold.RosterId)
+
+    return render(request, Paths.edit_achievement,
+                  {"form": form, "RosterId": achievement.RosterId})
+
+
+def bonus_artifacts_of_power(request, roster_id):
+    form = BonusArtifactsOfPowerForm()
+
+    if request.method == 'POST':
+        update_request = request.POST.copy()
+        update_request.update({'RosterId': roster_id})
+        form = BonusArtifactsOfPowerForm(update_request)
+        if form.is_valid():
+            form.save()
+            form = BonusArtifactsOfPowerForm()
+
+    powers = list(BonusArtifactsOfPower.objects.filter(RosterId=roster_id))
+
+    return render(request, Paths.bonusartifactsofpower, {"form": form, "RosterId": roster_id, "powers": powers})
+
+
+def edit_bonus_artifacts_of_power(request, power_id):
+    power = BonusArtifactsOfPower.objects.get(pk=power_id)
+    form = BonusArtifactsOfPowerForm(instance=power)
+
+    if request.method == 'POST':
+        instance = get_object_or_404(BonusArtifactsOfPower, id=power_id)
+        form = BonusArtifactsOfPowerForm(request.POST or None, instance=instance)
+        if form.is_valid():
+            form.save()
+            return redirect('bonus_artifacts_of_power', roster_id=power.RosterId)
+
+    return render(request, Paths.edit_stronghold,
+                  {"form": form, "RosterId": power.RosterId})
+
+
+def delete_bonus_artifacts_of_power(request, power_id):
+    power = BonusArtifactsOfPower.objects.get(pk=power_id)
+    roster_id = power.RosterId
+
+    if request.method == 'GET':
+        power.delete()
+
+    return redirect('bonus_artifacts_of_power', roster_id)
+
+
+def the_vault(request, roster_id):
+    vault = TheVault.objects.get_or_create(RosterId=roster_id)
+    return render(request, Paths.the_vault, {"vault": vault})
