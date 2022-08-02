@@ -16,39 +16,40 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from pathtoglory import views
+from pathtoglory import z_views
+from pathtoglory.views import achievements_view, home_view, rosters_view, questlog_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("accounts.urls")),  # new
     path("accounts/", include("django.contrib.auth.urls")),
-    path("", views.home, name="home"),
-    path("thevault/<int:roster_id>/", views.the_vault, name="thevault"),
+    path("", home_view.home, name="home"),
+    path("thevault/<int:roster_id>/", z_views.the_vault, name="thevault"),
     # region roster
-    path("grouprosters/<int:group_id>/", views.grouprosters, name="grouprosters"),
-    path("editroster/<int:roster_id>", views.editroster, name="editroster"),
-    path("createroster/", views.createroster, name="createroster"),
+    path("grouprosters/<int:group_id>/", rosters_view.grouprosters, name="grouprosters"),
+    path("editroster/<int:roster_id>", rosters_view.editroster, name="editroster"),
+    path("createroster/", rosters_view.createroster, name="createroster"),
     # endregion
     # region quests
-    path("createquestlog/<int:roster_id>/", views.createquestlog, name="createquestlog"),
-    path("editquestlog/<int:quest_id>/", views.edit_quest_log, name="editquestlog"),
-    path("deletequestlog/<int:quest_id>/", views.delete_quest_log, name="deletequestlog"),
+    path("createquestlog/<int:roster_id>/", questlog_view.createquestlog, name="createquestlog"),
+    path("editquestlog/<int:quest_id>/", questlog_view.edit_quest_log, name="editquestlog"),
+    path("deletequestlog/<int:quest_id>/", questlog_view.delete_quest_log, name="deletequestlog"),
     # endregion
     # region strongholds
-    path("createstronghold/<int:roster_id>", views.createstronghold, name="createstronghold"),
-    path("editstronghold/<int:stronghold_id>/", views.edit_stronghold, name="editstronghold"),
+    path("createstronghold/<int:roster_id>", z_views.createstronghold, name="createstronghold"),
+    path("editstronghold/<int:stronghold_id>/", z_views.edit_stronghold, name="editstronghold"),
     path("deletestronghold/<int:stronghold_id>/",
-         views.delete_stronghold, name="deletestronghold"),
+         z_views.delete_stronghold, name="deletestronghold"),
     # endregion
     # region achievements
-    path("achievements/<int:roster_id>", views.create_achievements, name="createachievements"),
-    path("achievement/<int:roster_id>", views.view_achievement, name="viewachievement"),
-    path("editachievements/<int:roster_id>", views.edit_achievements, name="editachievements"),
+    path("achievements/<int:roster_id>", achievements_view.create_achievements, name="createachievements"),
+    path("achievement/<int:roster_id>", achievements_view.view_achievement, name="viewachievement"),
+    path("editachievements/<int:roster_id>", achievements_view.edit_achievements, name="editachievements"),
     # endregion
     # region bonus artifacts of power
-    path("bonusartifactsofpower/<int:roster_id>", views.bonus_artifacts_of_power, name="artifactofpower"),
-    path("editbonusartifactsofpower/<int:power_id>", views.edit_bonus_artifacts_of_power, name="editartifactofpower"),
+    path("bonusartifactsofpower/<int:roster_id>", z_views.bonus_artifacts_of_power, name="artifactofpower"),
+    path("editbonusartifactsofpower/<int:power_id>", z_views.edit_bonus_artifacts_of_power, name="editartifactofpower"),
     path("deletebonusartifactsofpower/<int:power_id>/",
-         views.delete_bonus_artifacts_of_power, name="deletebonusartifactsofpower")
+         z_views.delete_bonus_artifacts_of_power, name="deletebonusartifactsofpower")
     # endregion
 ]
