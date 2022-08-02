@@ -228,5 +228,5 @@ def delete_bonus_artifacts_of_power(request, power_id):
 
 
 def the_vault(request, roster_id):
-    vault = TheVault.objects.get_or_create(RosterId=roster_id)
-    return render(request, Paths.the_vault, {"vault": vault})
+    #vault = TheVault.objects.get_or_create(RosterId=roster_id)
+    return render(request, Paths.the_vault, {"vault": ""})
