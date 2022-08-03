@@ -83,3 +83,4 @@ class BonusArtifactsOfPowerForm(ModelForm):
         widgets = {
             'Roster_Id': forms.HiddenInput()
         }
+

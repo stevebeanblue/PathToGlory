@@ -7,22 +7,34 @@
     <div class="container">
         <h2>The Vault</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
-        <table class="responsive-table">
-            <thead>
-              <tr>
-                  <th>Bonus Artefacts of Power</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Alvin</td>
-                <td>Eclair</td>
-              </tr>
-              <tr>
-                <td>Alvin</td>
-                <td>Eclair</td>
-              </tr>
-            </tbody>
-        </table>
+        {% if vault %}
+            <table class="responsive-table">
+                <thead>
+                  <tr>
+                      <th>Bonus Artefacts of Power</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Alvin</td>
+                    <td>Eclair</td>
+                  </tr>
+                  <tr>
+                    <td>Alvin</td>
+                    <td>Eclair</td>
+                  </tr>
+                </tbody>
+            </table>
+        {% else %}
+            <p>There is currently no vault for this roster</p>
+            {% if user.is_authenticated and user.id == user_id %}
+                <form>
+                    {% csrf_token %}
+                    <button class="btn waves-effect waves-light black" type="submit" name="Create">Create
+                        <i class="material-icons right">create</i>
+                    </button>
+                </form>
+            {% endif %}
+        {% endif %}
     </div>
 {% endblock %}
