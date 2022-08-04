@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
-from pathtoglory.models import Roster, QuestLog, Stronghold, Achievements, BonusArtifactsOfPower
+from pathtoglory.models import Roster, QuestLog, Stronghold, Achievements, BonusArtifactsOfPower, \
+    BonusUniqueEnhancements, BonusSpells, BonusPrayers, EndlessSpellsAndInvocations, Battalions
 
 
 class CreateRosterForm(ModelForm):
@@ -76,6 +77,61 @@ class AchievementsForm(ModelForm):
 class BonusArtifactsOfPowerForm(ModelForm):
     class Meta:
         model = BonusArtifactsOfPower
+        fields = {
+            'Name',
+            'Roster_Id',
+        }
+        widgets = {
+            'Roster_Id': forms.HiddenInput()
+        }
+
+class BonusUniqueEnhancementsForm(ModelForm):
+    class Meta:
+        model = BonusUniqueEnhancements
+        fields = {
+            'Name',
+            'Roster_Id',
+        }
+        widgets = {
+            'Roster_Id': forms.HiddenInput()
+        }
+
+class BonusSpellsForm(ModelForm):
+    class Meta:
+        model = BonusSpells
+        fields = {
+            'Name',
+            'Roster_Id',
+        }
+        widgets = {
+            'Roster_Id': forms.HiddenInput()
+        }
+
+class BonusPrayersForm(ModelForm):
+    class Meta:
+        model = BonusPrayers
+        fields = {
+            'Name',
+            'Roster_Id',
+        }
+        widgets = {
+            'Roster_Id': forms.HiddenInput()
+        }
+
+class EndlessSpellsAndInvocationsForm(ModelForm):
+    class Meta:
+        model = EndlessSpellsAndInvocations
+        fields = {
+            'Name',
+            'Roster_Id',
+        }
+        widgets = {
+            'Roster_Id': forms.HiddenInput()
+        }
+
+class BattalionsForm(ModelForm):
+    class Meta:
+        model = Battalions
         fields = {
             'Name',
             'Roster_Id',

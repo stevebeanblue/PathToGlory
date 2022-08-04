@@ -55,7 +55,7 @@ class Battalions(models.Model):
 
 
 class TheVault(models.Model):
-    RosterId = models.IntegerField(default=0)
+    Roster_Id = models.IntegerField(default=0)
     Triumph = models.TextField()
     BonusArtifactsOfPower = models.ForeignKey(
         BonusArtifactsOfPower,
