@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from pathtoglory.models import Roster, QuestLog, Stronghold, Achievements, BonusArtifactsOfPower, \
-    BonusUniqueEnhancements, BonusSpells, BonusPrayers, EndlessSpellsAndInvocations, Battalions
+    BonusUniqueEnhancements, BonusSpells, BonusPrayers, EndlessSpellsAndInvocations, Battalions, TheVault
 
 
 class CreateRosterForm(ModelForm):
@@ -80,9 +80,11 @@ class BonusArtifactsOfPowerForm(ModelForm):
         fields = {
             'Name',
             'Roster_Id',
+            'Vault_Id',
         }
         widgets = {
-            'Roster_Id': forms.HiddenInput()
+            'Roster_Id': forms.HiddenInput(),
+            'Vault_Id': forms.HiddenInput()
         }
 
 class BonusUniqueEnhancementsForm(ModelForm):
@@ -91,9 +93,11 @@ class BonusUniqueEnhancementsForm(ModelForm):
         fields = {
             'Name',
             'Roster_Id',
+            'Vault_Id',
         }
         widgets = {
-            'Roster_Id': forms.HiddenInput()
+            'Roster_Id': forms.HiddenInput(),
+            'Vault_Id': forms.HiddenInput()
         }
 
 class BonusSpellsForm(ModelForm):
@@ -102,9 +106,11 @@ class BonusSpellsForm(ModelForm):
         fields = {
             'Name',
             'Roster_Id',
+            'Vault_Id',
         }
         widgets = {
-            'Roster_Id': forms.HiddenInput()
+            'Roster_Id': forms.HiddenInput(),
+            'Vault_Id': forms.HiddenInput()
         }
 
 class BonusPrayersForm(ModelForm):
@@ -113,9 +119,11 @@ class BonusPrayersForm(ModelForm):
         fields = {
             'Name',
             'Roster_Id',
+            'Vault_Id',
         }
         widgets = {
-            'Roster_Id': forms.HiddenInput()
+            'Roster_Id': forms.HiddenInput(),
+            'Vault_Id': forms.HiddenInput()
         }
 
 class EndlessSpellsAndInvocationsForm(ModelForm):
@@ -124,9 +132,11 @@ class EndlessSpellsAndInvocationsForm(ModelForm):
         fields = {
             'Name',
             'Roster_Id',
+            'Vault_Id',
         }
         widgets = {
-            'Roster_Id': forms.HiddenInput()
+            'Roster_Id': forms.HiddenInput(),
+            'Vault_Id': forms.HiddenInput()
         }
 
 class BattalionsForm(ModelForm):
@@ -135,8 +145,20 @@ class BattalionsForm(ModelForm):
         fields = {
             'Name',
             'Roster_Id',
+            'Vault_Id',
+        }
+        widgets = {
+            'Roster_Id': forms.HiddenInput(),
+            'Vault_Id': forms.HiddenInput()
+        }
+
+class TheVaultForm(ModelForm):
+    class Meta:
+        model = TheVault
+        fields = {
+            'Roster_Id',
+            'Triumph'
         }
         widgets = {
             'Roster_Id': forms.HiddenInput()
         }
-

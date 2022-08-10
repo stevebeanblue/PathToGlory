@@ -23,65 +23,41 @@ class Stronghold(models.Model):
     Imposing = models.BooleanField(default=False)
     Mighty = models.BooleanField(default=False)
 
+class TheVault(models.Model):
+    Roster_Id = models.IntegerField(default=0)
+    Triumph = models.TextField()
 
 class BonusArtifactsOfPower(models.Model):
     Name = models.TextField()
     Roster_Id = models.IntegerField(default=0)
-
+    Vault_Id = models.ForeignKey(TheVault, related_name='BonusArtifactsOfPower',
+                                 on_delete=models.CASCADE, default=0)
 
 class BonusUniqueEnhancements(models.Model):
     Name = models.TextField()
     Roster_Id = models.IntegerField(default=0)
-
+    Vault_Id = models.ForeignKey(TheVault, related_name='BonusUniqueEnhancements', on_delete=models.CASCADE, default=0)
 
 class BonusSpells(models.Model):
     Name = models.TextField()
     Roster_Id = models.IntegerField(default=0)
-
+    Vault_Id = models.ForeignKey(TheVault, related_name='BonusSpells', on_delete=models.CASCADE, default=0)
 
 class BonusPrayers(models.Model):
     Name = models.TextField()
     Roster_Id = models.IntegerField(default=0)
+    Vault_Id = models.ForeignKey(TheVault, related_name='BonusPrayers', on_delete=models.CASCADE, default=0)
 
 
 class EndlessSpellsAndInvocations(models.Model):
     Name = models.TextField()
     Roster_Id = models.IntegerField(default=0)
-
+    Vault_Id = models.ForeignKey(TheVault, related_name='EndlessSpellsAndInvocations', on_delete=models.CASCADE, default=0)
 
 class Battalions(models.Model):
     Name = models.TextField()
     Roster_Id = models.IntegerField(default=0)
-
-
-class TheVault(models.Model):
-    Roster_Id = models.IntegerField(default=0)
-    Triumph = models.TextField()
-    BonusArtifactsOfPower = models.ForeignKey(
-        BonusArtifactsOfPower,
-        on_delete=models.CASCADE
-    )
-    BonusUniqueEnhancements = models.ForeignKey(
-        BonusUniqueEnhancements,
-        on_delete=models.CASCADE
-    )
-    BonusSpells = models.ForeignKey(
-        BonusSpells,
-        on_delete=models.CASCADE
-    )
-    BonusPrayers = models.ForeignKey(
-        BonusPrayers,
-        on_delete=models.CASCADE
-    )
-    EndlessSpellsAndInvocations = models.ForeignKey(
-        EndlessSpellsAndInvocations,
-        on_delete=models.CASCADE
-    )
-    Battalions = models.ForeignKey(
-        Battalions,
-        on_delete=models.CASCADE
-    )
-
+    Vault_Id = models.ForeignKey(TheVault, related_name='Battalions', on_delete=models.CASCADE, default=0)
 
 class StrongholdTerritories(models.Model):
     TerritoriesId = models.IntegerField(default=0)

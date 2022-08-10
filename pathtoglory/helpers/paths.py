@@ -1,7 +1,11 @@
 class Paths:
     group_rosters = "groups/groupRosters.html"
     home = "home.html"
+    # region vault
     the_vault = "thevault/vault.html"
+    create_vault = "thevault/create_vault"
+    edit_vault = "thevault/edit_vault.html"
+    # endregion
     # region roster
     create_roster = "rosters/create_roster.html"
     edit_roster = "rosters/edit_roster.html"

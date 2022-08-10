@@ -24,7 +24,11 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),  # new
     path("accounts/", include("django.contrib.auth.urls")),
     path("", home_view.home, name="home"),
+    # region vault
     path("thevault/<int:roster_id>/", the_vault_view.the_vault, name="thevault"),
+    path("editvault/<int:vault_id>/", the_vault_view.edit_vault, name="edit_vault"),
+    path("createvault/<int:vault_id>/", the_vault_view.edit_vault, name="create_vault"),
+    # endregion
     # region roster
     path("grouprosters/<int:group_id>/", rosters_view.grouprosters, name="grouprosters"),
     path("editroster/<int:roster_id>", rosters_view.editroster, name="editroster"),

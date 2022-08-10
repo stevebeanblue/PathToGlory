@@ -1,0 +1,29 @@
+{% extends "shared/layout.html" %}
+{% load material_form %}
+{% block title %}
+    The Vault
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Create Vault</h2>
+        <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
+        {% if if user.is_authenticated and user.id == user_id %}
+            <div class="container">
+                <row>
+                    <div class="col s1">
+                        <p>{{ form.errors }}</p>
+                        <form method="post">
+                            {% csrf_token %}
+                            {% form form=form %}{% end form %}
+                            <button class="btn waves-effect waves-light black" type="submit" name="Create">Create
+                                <i class="material-icons right">create</i>
+                            </button>
+                        </form>
+                    </div>
+                </row>
+            </div>
+        {% else %}
+            <p>You can't create a Vault for this roster</p>
+        {% endif %}
+    </div>
+{% endblock %}
