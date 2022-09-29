@@ -1,0 +1,27 @@
+{% extends "shared/layout.html" %}
+{% load material_form %}
+{% block title %}
+    Warlord
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Warlord</h2>
+        <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
+        <div class="row">
+            <div class="col s8">
+                {% if form %}
+                    {{ form.as_p}}
+                    {% if user.is_authenticated and user.id == user_id %}
+                        <a href="{% url 'edit_warlord' roster_id %}">Edit</a>
+                        <a href="{% url 'delete_warlord' roster_id %}">Delete</a>
+                    {% endif %}
+                {% else %}
+                    <p>No warlord has been added to this roster.</p>
+                    {% if user.is_authenticated and user.id == user_id %}
+                        <a href="{% url 'create_warlord' roster_id %}">Create</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,9 +1,11 @@
 from django import forms
 from django.forms import ModelForm
 from pathtoglory.models import Roster, QuestLog, Stronghold, Achievements, BonusArtifactsOfPower, \
-    BonusUniqueEnhancements, BonusSpells, BonusPrayers, EndlessSpellsAndInvocations, Battalions, TheVault
+    BonusUniqueEnhancements, BonusSpells, BonusPrayers, EndlessSpellsAndInvocations, Battalions, TheVault, \
+    Warlord, OrderOfBattle, Hero, Unit
 
 
+# region roster
 class CreateRosterForm(ModelForm):
     class Meta:
         model = Roster
@@ -30,6 +32,8 @@ class CreateRosterForm(ModelForm):
         }
 
 
+# endregion
+# region quest
 class QuestLogForm(ModelForm):
     class Meta:
         model = QuestLog
@@ -44,6 +48,8 @@ class QuestLogForm(ModelForm):
         }
 
 
+# endregion
+# region stronghold
 class StrongholdForm(ModelForm):
     class Meta:
         model = Stronghold
@@ -59,6 +65,8 @@ class StrongholdForm(ModelForm):
         }
 
 
+# endregion
+# region achievement
 class AchievementsForm(ModelForm):
     class Meta:
         model = Achievements
@@ -74,6 +82,8 @@ class AchievementsForm(ModelForm):
         }
 
 
+# endregion
+# region BAoP
 class BonusArtifactsOfPowerForm(ModelForm):
     class Meta:
         model = BonusArtifactsOfPower
@@ -87,6 +97,9 @@ class BonusArtifactsOfPowerForm(ModelForm):
             'Vault_Id': forms.HiddenInput()
         }
 
+
+# endregion
+# region BUE
 class BonusUniqueEnhancementsForm(ModelForm):
     class Meta:
         model = BonusUniqueEnhancements
@@ -100,6 +113,9 @@ class BonusUniqueEnhancementsForm(ModelForm):
             'Vault_Id': forms.HiddenInput()
         }
 
+
+# endregion
+# region spell
 class BonusSpellsForm(ModelForm):
     class Meta:
         model = BonusSpells
@@ -113,6 +129,9 @@ class BonusSpellsForm(ModelForm):
             'Vault_Id': forms.HiddenInput()
         }
 
+
+# endregion
+# region payers
 class BonusPrayersForm(ModelForm):
     class Meta:
         model = BonusPrayers
@@ -126,6 +145,9 @@ class BonusPrayersForm(ModelForm):
             'Vault_Id': forms.HiddenInput()
         }
 
+
+# endregion
+# region endless spell
 class EndlessSpellsAndInvocationsForm(ModelForm):
     class Meta:
         model = EndlessSpellsAndInvocations
@@ -139,6 +161,9 @@ class EndlessSpellsAndInvocationsForm(ModelForm):
             'Vault_Id': forms.HiddenInput()
         }
 
+
+# endregion
+# region battalions
 class BattalionsForm(ModelForm):
     class Meta:
         model = Battalions
@@ -152,6 +177,9 @@ class BattalionsForm(ModelForm):
             'Vault_Id': forms.HiddenInput()
         }
 
+
+# endregion
+# region vault
 class TheVaultForm(ModelForm):
     class Meta:
         model = TheVault
@@ -160,5 +188,88 @@ class TheVaultForm(ModelForm):
             'Triumph'
         }
         widgets = {
-            'Roster_Id': forms.HiddenInput()
+            'Roster_Id': forms.HiddenInput(),
         }
+
+
+# endregion
+# region order of battle
+class OrderOfBattleForm(ModelForm):
+    class Meta:
+        model = OrderOfBattle
+        fields = {
+            'Roster_id',
+            'TotalUnits',
+            'Heroes',
+            'Monsters',
+            'WarMachines',
+            'Wizards',
+            'Priests',
+            'ReinforcedUnits',
+            'Allies'
+        }
+        widgets = {
+            'Roster_id': forms.HiddenInput()
+        }
+
+
+# endregion
+# region warlord
+class WarlordForm(ModelForm):
+    class Meta:
+        model = Warlord
+        fields = {
+            'OrderOfBattle',
+            'Name',
+            'Warscroll',
+            'CommandTrait',
+            'CoreEnhancement_Notes',
+            'Injury',
+            'RenownPoints',
+            'Points'
+        }
+        widgets = {
+            'OrderOfBattle': forms.HiddenInput()
+        }
+
+
+# endregion
+# region Hero
+class HeroForm(ModelForm):
+    class Meta:
+        model = Hero
+        fields = {
+            'OrderOfBattle',
+            'Name',
+            'Warscroll',
+            'CommandTrait',
+            'CoreEnhancement_Notes',
+            'Injury',
+            'RenownPoints',
+            'Points'
+        }
+        widgets = {
+            'OrderOfBattle': forms.HiddenInput()
+        }
+
+
+# endregion
+# region unit
+class UnitForm(ModelForm):
+    class Meta:
+        model = Unit
+        fields = {
+            'OrderOfBattle',
+            'Name',
+            'Warscroll',
+            'VeteranAbilities_Notes',
+            'Reinforced1',
+            'Reinforced2',
+            'CasualtyScore',
+            'RenownPoints',
+            'Points'
+        }
+        widgets = {
+            'OrderOfBattle': forms.HiddenInput()
+        }
+# end region

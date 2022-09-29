@@ -1,17 +1,19 @@
 {% extends "shared/layout.html" %}
 {% load material_form %}
 {% block title %}
-    The Vault
+    Edit a bonus artifact of power
 {% endblock %}
 {% block content %}
     <div class="container">
-        <h2>Edit Vault</h2>
+        <h2>Bonus artifacts of power</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
         <div class="row">
             <div class="col s6">
-                <form method="post">
+                <h3>Edit a bonus artifact of power</h3>
+                <form action = "" method = "post">
+                    <p>{{ form.errors }}</p>
                     {% csrf_token %}
-                    {% form form=form %}{% end form %}
+                    {% form form=form %}{% endform %}
                     <button class="btn waves-effect waves-light black" type="submit" name="Save">Save
                         <i class="material-icons right">save</i>
                     </button>

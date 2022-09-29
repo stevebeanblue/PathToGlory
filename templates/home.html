@@ -3,8 +3,19 @@
     Home
 {% endblock %}
 {% block content %}
-    <div class="container">
-        <h1 class="center-align">The path to glory begins here!</h1>
+    <div class="section white">
+      <div class="row container">
+          <h1 class="center-align">The path to glory begins here!</h1>
+      </div>
+    </div>
+    <div class="parallax-container">
+      <div class="parallax">
+          {% load static %}
+          <img src="{% static  'images/A_warriors_with_swords_walking_through_a_waste_land_in_a_storm_.png'%}" alt="Warriors walking in a storm">
+      </div>
+    </div>
+    <div class="section white">
+      <div class="row container">
         {% if user.is_authenticated %}
             Hi {{ user.username }}!
             <p><a href="{% url 'logout' %}">Log Out</a></p>
@@ -13,10 +24,15 @@
             <a href="{% url 'login' %}">Log In</a>
             <a href="{% url 'signup' %}">Sign up</a>
         {% endif %}
-        <ul>
-            {% for Group in PathToGloryGroup %}
-                <li><a href="{% url 'grouprosters' Group.pk %}">{{ Group.Description }}</a></li>
-            {% endfor %}
-        </ul>
+        </div>
+         <div class="section white">
+             <div class="row container">
+                <ul>
+                    {% for Group in PathToGloryGroup %}
+                        <li><a href="{% url 'grouprosters' Group.pk %}">{{ Group.Description }}</a></li>
+                    {% endfor %}
+                </ul>
+             </div>
+         </div>
     </div>
 {% endblock %}

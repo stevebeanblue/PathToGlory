@@ -1,11 +1,11 @@
 {% extends "shared/layout.html" %}
 {% load material_form %}
 {% block title %}
-    Bonus artifacts of power
+    Bonus spells
 {% endblock %}
 {% block content %}
     <div class="container">
-        <h2>Bonus artifacts of power</h2>
+        <h2>Bonus spells</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
         <div class="row">
             {% if user.is_authenticated %}
@@ -24,18 +24,18 @@
                     <ul class="collapsible popout">
                         {% for item in vault_item %}
                             <li>
-                              <div class="collapsible-header"><i class="material-icons">power</i>Artifact of power: {{ item.Name }}</div>
+                              <div class="collapsible-header"><i class="material-icons">grain</i>Spell: {{ item.Name }}</div>
                               <div class="collapsible-body">
                                   {% if user.is_authenticated %}
-                                    <span><a href="{% url 'editartifactofpower' item.pk %}">Edit</a></span>
-                                    <span><a href="{% url 'deleteartifactofpower' item.pk %}">Delete</a></span>
+                                    <span><a href="{% url 'edit_bonus_spell' item.pk %}">Edit</a></span>
+                                    <span><a href="{% url 'delete_bonus_spell' item.pk %}">Delete</a></span>
                                   {% endif %}
                               </div>
                             </li>
                         {% endfor %}
                       </ul>
                 {% else %}
-                    <p>There is no artifacts of power</p>
+                    <p>There are no bonus spells</p>
                 {% endif %}
             </div>
         </div>

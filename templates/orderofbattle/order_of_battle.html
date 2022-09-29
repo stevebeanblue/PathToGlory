@@ -1,0 +1,40 @@
+{% extends "shared/layout.html" %}
+{% load material_form %}
+{% block title %}
+    Order of battle
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Order of battle</h2>
+        <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
+        {% if form %}
+            <div class="row">
+                <div class="col s6">
+                    {{ form.as_p}}
+                    {% if user.is_authenticated and user.id == user_id %}
+                        <a href="{% url 'edit_order_of_battle' form.instance.id %}">Edit</a>
+                    {% endif %}
+                </div>
+                <div class="col s6 right-align">
+                    <p>
+                        <i class="material-icons">accessibility</i>
+                        <a href="{% url 'warlord' roster_id %}">Warlord</a>
+                    </p>
+                    <p>
+                        <i class="material-icons">directions_run</i>
+                        <a href="{% url 'hero' roster_id %}">Hero</a>
+                    </p>
+                    <p>
+                        <i class="material-icons">group</i>
+                        <a href="{% url 'unit' roster_id %}">Unit</a>
+                    </p>
+                </div>
+            </div>
+        {% else %}
+            <p>There is currently no order of battle for this roster</p>
+            {% if user.is_authenticated and user.id == user_id %}
+                <a href="{% url 'create_order_of_battle' roster_id %}">Create an order of battle</a>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

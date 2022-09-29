@@ -6,42 +6,53 @@
     <div class="container">
         <h2>Rosters</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
-        {% for Roster in Rosters %}
-            <div class="row">
-                <div class="col s6">
-                    <p>Player Name: {{ Roster.PlayerName }}</p>
-                    <p>ArmyName: {{ Roster.ArmyName }}</p>
-                    <p>Faction: {{ Roster.Faction }}</p>
-                    <p>Realm Of Origin: {{ Roster.RealmOfOrigin }}</p>
-                    <p>Subfaction: {{ Roster.Subfaction }}</p>
-                    <p>Starting Size: {{ Roster.StartingSize }} pts</p>
-                    <p>Date Created: {{ Roster.DateCreated }}</p>
-                    <p>Completed: {{ Roster.IsCompleted }}</p>
-                    <p>Current Glory: {{ Roster.Glory }}</p>
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'editroster' Roster.pk %}">Edit</a>
-                    {% endif %}
+        {% if Rosters %}
+            {% for Roster in Rosters %}
+                <div class="row">
+                    <div class="col s6">
+                        <p>Player Name: {{ Roster.PlayerName }}</p>
+                        <p>ArmyName: {{ Roster.ArmyName }}</p>
+                        <p>Faction: {{ Roster.Faction }}</p>
+                        <p>Realm Of Origin: {{ Roster.RealmOfOrigin }}</p>
+                        <p>Subfaction: {{ Roster.Subfaction }}</p>
+                        <p>Starting Size: {{ Roster.StartingSize }} pts</p>
+                        <p>Date Created: {{ Roster.DateCreated }}</p>
+                        <p>Completed: {{ Roster.IsCompleted }}</p>
+                        <p>Current Glory: {{ Roster.Glory }}</p>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'editroster' Roster.pk %}">Edit</a>
+                            <a href="{% url 'delete_roster' Roster.pk %}">Delete</a>
+                        {% endif %}
+                    </div>
+                    <div class="col s6 right-align">
+                        <p>
+                            <i class="material-icons">explore</i>
+                            <a href="{% url 'createquestlog' Roster.pk %}">Quest Log</a>
+                        </p>
+                        <p>
+                            <i class="material-icons">account_balance</i>
+                            <a href="{% url 'createstronghold' Roster.pk %}">Strongholds</a>
+                        </p>
+                        <p>
+                            <i class="material-icons">star</i>
+                            <a href="{% url 'createachievements' Roster.pk %}">Achievements</a>
+                        </p>
+                        <p>
+                            <i class="material-icons">lock</i>
+                            <a href="{% url 'thevault' Roster.pk %}">The Vault</a>
+                        </p>
+                        <p>
+                            <i class="material-icons">featured_play_list</i>
+                            <a href="{% url 'order_of_battle' Roster.pk %}">Order of battle</a>
+                        </p>
+                    </div>
                 </div>
-                <div class="col s6 right-align">
-                    <p>
-                        <i class="material-icons">explore</i>
-                        <a href="{% url 'createquestlog' Roster.pk %}">Quest Log</a>
-                    </p>
-                    <p>
-                        <i class="material-icons">account_balance</i>
-                        <a href="{% url 'createstronghold' Roster.pk %}">Strongholds</a>
-                    </p>
-                    <p>
-                        <i class="material-icons">star</i>
-                        <a href="{% url 'createachievements' Roster.pk %}">Achievements</a>
-                    </p>
-                    <p>
-                        <i class="material-icons">lock</i>
-                        <a href="{% url 'thevault' Roster.pk %}">The Vault</a>
-                    </p>
-                </div>
+                <hr/>
+            {% endfor %}
+        {% else %}
+            <div class="container">
+                <p>There is currently no rosters</p>
             </div>
-            <hr/>
-        {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}

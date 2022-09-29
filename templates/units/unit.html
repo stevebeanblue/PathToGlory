@@ -1,0 +1,52 @@
+{% extends "shared/layout.html" %}
+{% load material_form %}
+{% block title %}
+    Units
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Units</h2>
+        <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
+        <div class="row">
+            {% if user.is_authenticated and user.id == user_id  %}
+                <div class="col s6">
+                    <p>{{ form.errors }}</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% form form=form %}{% end form %}
+                            <button class="btn waves-effect waves-light black" type="submit" name="Create">Create
+                                <i class="material-icons right">create</i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+            <div class="col s6">
+                {% if units %}
+                    <ul class="collapsible popout">
+                        {% for unit in units %}
+                            <li>
+                              <div class="collapsible-header"><i class="material-icons">group</i>Unit: {{ unit.Name }}</div>
+                              <div class="collapsible-body">
+                                  <p>Warscroll: {{ unit.Warscroll }}</p>
+                                  <p>Veteran abilities/Notes: {{ unit.VeteranAbilities_Notes }}</p>
+                                  <p>Reinforced1: {{ unit.Reinforced1 }}</p>
+                                  <p>Reinforced2: {{ unit.Reinforced2 }}</p>
+                                  <p>Casualty score: {{ unit.CasualtyScore }}</p>
+                                  <p>RenownPoints: {{ unit.RenownPoints }}</p>
+                                  <p>Points: {{ unit.Points }}</p>
+                                  {% if user.is_authenticated and user.id == user_id %}
+                                    <span><a href="{% url 'edit_unit' unit.pk %}">Edit</a></span>
+                                    <span><a href="{% url 'delete_unit' unit.pk %}">Delete</a></span>
+                                  {% endif %}
+                              </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No units has been added to this roster.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

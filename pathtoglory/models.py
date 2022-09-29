@@ -23,9 +23,11 @@ class Stronghold(models.Model):
     Imposing = models.BooleanField(default=False)
     Mighty = models.BooleanField(default=False)
 
+
 class TheVault(models.Model):
     Roster_Id = models.IntegerField(default=0)
     Triumph = models.TextField()
+
 
 class BonusArtifactsOfPower(models.Model):
     Name = models.TextField()
@@ -33,15 +35,18 @@ class BonusArtifactsOfPower(models.Model):
     Vault_Id = models.ForeignKey(TheVault, related_name='BonusArtifactsOfPower',
                                  on_delete=models.CASCADE, default=0)
 
+
 class BonusUniqueEnhancements(models.Model):
     Name = models.TextField()
     Roster_Id = models.IntegerField(default=0)
     Vault_Id = models.ForeignKey(TheVault, related_name='BonusUniqueEnhancements', on_delete=models.CASCADE, default=0)
 
+
 class BonusSpells(models.Model):
     Name = models.TextField()
     Roster_Id = models.IntegerField(default=0)
     Vault_Id = models.ForeignKey(TheVault, related_name='BonusSpells', on_delete=models.CASCADE, default=0)
+
 
 class BonusPrayers(models.Model):
     Name = models.TextField()
@@ -52,12 +57,15 @@ class BonusPrayers(models.Model):
 class EndlessSpellsAndInvocations(models.Model):
     Name = models.TextField()
     Roster_Id = models.IntegerField(default=0)
-    Vault_Id = models.ForeignKey(TheVault, related_name='EndlessSpellsAndInvocations', on_delete=models.CASCADE, default=0)
+    Vault_Id = models.ForeignKey(TheVault, related_name='EndlessSpellsAndInvocations', on_delete=models.CASCADE,
+                                 default=0)
+
 
 class Battalions(models.Model):
     Name = models.TextField()
     Roster_Id = models.IntegerField(default=0)
     Vault_Id = models.ForeignKey(TheVault, related_name='Battalions', on_delete=models.CASCADE, default=0)
+
 
 class StrongholdTerritories(models.Model):
     TerritoriesId = models.IntegerField(default=0)
@@ -120,3 +128,48 @@ class Territories(models.Model):
         MightyStrongholdTerritories,
         on_delete=models.CASCADE
     )
+
+
+class OrderOfBattle(models.Model):
+    Roster_id = models.IntegerField(default=0)
+    TotalUnits = models.IntegerField(default=0)
+    Heroes = models.IntegerField(default=0)
+    Monsters = models.IntegerField(default=0)
+    WarMachines = models.IntegerField(default=0)
+    Wizards = models.IntegerField(default=0)
+    Priests = models.IntegerField(default=0)
+    ReinforcedUnits = models.IntegerField(default=0)
+    Allies = models.IntegerField(default=0)
+
+
+class HeroDetails(models.Model):
+    Name = models.TextField()
+    Warscroll = models.TextField()
+    CommandTrait = models.TextField()
+    CoreEnhancement_Notes = models.TextField()
+    Injury = models.BooleanField(default=False)
+    RenownPoints = models.IntegerField(default=0)
+    Points = models.IntegerField(default=0)
+
+    class Meta:
+        abstract = True
+
+
+class Warlord(HeroDetails):
+    OrderOfBattle = models.ForeignKey(OrderOfBattle, related_name='Warlord', on_delete=models.CASCADE, default=0)
+
+
+class Hero(HeroDetails):
+    OrderOfBattle = models.ForeignKey(OrderOfBattle, related_name='Hero', on_delete=models.CASCADE, default=0)
+
+
+class Unit(models.Model):
+    OrderOfBattle = models.ForeignKey(OrderOfBattle, related_name='Unit', on_delete=models.CASCADE, default=0)
+    Name = models.TextField()
+    Warscroll = models.TextField()
+    VeteranAbilities_Notes = models.TextField()
+    Reinforced1 = models.BooleanField(default=False)
+    Reinforced2 = models.BooleanField(default=False)
+    CasualtyScore = models.IntegerField(default=0)
+    RenownPoints = models.IntegerField(default=0)
+    Points = models.IntegerField(default=0)

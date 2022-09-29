@@ -8,15 +8,40 @@
         <h2>The Vault</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
         {% if form %}
-            <div class="container">
-                <row>
-                    <div class="col s1">
-                        {{ form.as_p}}
-                        {% if user.is_authenticated and user.id == user_id %}
-                            <a href="{% url 'editvault' form.pk %}">Edit</a>
-                        {% endif %}
-                    </div>
-                </row>
+            <div class="row">
+                <div class="col s6">
+                    {{ form.as_p}}
+                    {% if user.is_authenticated and user.id == user_id %}
+                        <a href="{% url 'editvault' vault_id %}">Edit</a>
+                        <a href="{% url 'deletevault' roster_id %}">Delete</a>
+                    {% endif %}
+                </div>
+                <div class="col s6 right-align">
+                    <p>
+                        <i class="material-icons">power</i>
+                        <a href="{% url 'bonusartifactsofpower' vault_id %}">Bonus Artifacts Of Power</a>
+                    </p>
+                    <p>
+                        <i class="material-icons">trending_up</i>
+                        <a href="{% url 'bonus_unique_enhancement' vault_id %}">Bonus Unique Enhancements</a>
+                    </p>
+                    <p>
+                        <i class="material-icons">grain</i>
+                        <a href="{% url 'bonus_spells' vault_id %}">Bonus Spells</a>
+                    </p>
+                    <p>
+                        <i class="material-icons">local_library</i>
+                        <a href="{% url 'bonus_prayers' vault_id %}">Bonus Prayers</a>
+                    </p>
+                    <p>
+                        <i class="material-icons">wb_iridescent</i>
+                        <a href="{% url 'endless_spells_and_invocations' vault_id %}">Endless Spells And Invocations</a>
+                    </p>
+                    <p>
+                        <i class="material-icons">group</i>
+                        <a href="{% url 'battalions' vault_id %}">Battalions</a>
+                    </p>
+                </div>
             </div>
         {% else %}
             <p>There is currently no vault for this roster</p>
