@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-e5!t0m=@eowwg4x_$g7wdep)8v(gih(mcc+dsb_92zcb0%hok=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,12 +78,23 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'RecordOfGlory$PathToGlory',
+                    'USER': 'Username',
+                    'PASSWORD': '!RoadToGlory*',
+                    'HOST': 'user.mysql.pythonanywhere-services.com',
+        }
+    }
 
 
 # Password validation
