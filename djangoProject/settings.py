@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import mimetypes
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,12 +22,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e5!t0m=@eowwg4x_$g7wdep)8v(gih(mcc+dsb_92zcb0%hok='
+SECRET_KEY = SECRET_KEY = os.environ.get('SETCRET_KEY', 'some_random_default_string')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    os.environ.get('live', 'some_random_default_string'),
+    'pathtoglory.pythonanywhere.com',
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -89,9 +94,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'RecordOfGlory$PathToGlory',
-                    'USER': 'Username',
-                    'PASSWORD': '!RoadToGlory*',
+            'NAME': 'PathToGlory$PathToGlory',
+                    'USER': os.environ.get('DB_USER', 'some_random_default_string'),
+                    'PASSWORD': os.environ.get('DB_PWRD', 'some_random_default_string'),
                     'HOST': 'user.mysql.pythonanywhere-services.com',
         }
     }
@@ -131,7 +136,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+mimetypes.add_type("text/css", ".css", True)
+
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR.joinpath('pathtoglory/static/')
+]
+
+STATIC_ROOT = '/home/PathToGlory/pathtoglory/static'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR.joinpath('media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
