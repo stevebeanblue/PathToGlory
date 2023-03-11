@@ -94,10 +94,10 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'PathToGlory$PathToGlory',
+            'NAME': 'pathtoglory$pathtoglory',
                     'USER': os.environ.get('DB_USER', 'some_random_default_string'),
                     'PASSWORD': os.environ.get('DB_PWRD', 'some_random_default_string'),
-                    'HOST': 'user.mysql.pythonanywhere-services.com',
+                    'HOST': 'pathtoglory.mysql.pythonanywhere-services.com',
         }
     }
 
