@@ -28,7 +28,6 @@ SECRET_KEY = SECRET_KEY = os.environ.get('SETCRET_KEY', 'some_random_default_str
 DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = [
-    os.environ.get('live', 'some_random_default_string'),
     'pathtoglory.pythonanywhere.com',
     '127.0.0.1'
 ]
