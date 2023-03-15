@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from pathtoglory.models import Roster, QuestLog, Stronghold, Achievements, BonusArtifactsOfPower, \
     BonusUniqueEnhancements, BonusSpells, BonusPrayers, EndlessSpellsAndInvocations, Battalions, TheVault, \
-    Warlord, OrderOfBattle, Hero, Unit
+    Warlord, OrderOfBattle, Hero, Unit, PathToGloryGroup
 
 
 # region roster
@@ -80,7 +80,6 @@ class AchievementsForm(ModelForm):
         widgets = {
             'RosterId': forms.HiddenInput(),
         }
-
 
 # endregion
 # region BAoP

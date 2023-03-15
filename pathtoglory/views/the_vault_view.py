@@ -10,16 +10,17 @@ from ..models import TheVault
 
 def the_vault(request, roster_id):
     user_id = user_by_roster_id.get_user_id_by_roster_id(roster_id)
-
+    vault_id = 0
     if request.method == 'GET':
         try:
             vault = TheVault.objects.get(Roster_Id=roster_id)
+            vault_id = vault.id
             form = TheVaultForm(instance=vault)
         except ObjectDoesNotExist:
             form = None
 
     return render(request, Paths.the_vault, {"form": form, "user_id": user_id, "roster_id": roster_id,
-                                             "vault_id": vault.id})
+                                             "vault_id": vault_id})
 
 
 def create_vault(request, roster_id):
