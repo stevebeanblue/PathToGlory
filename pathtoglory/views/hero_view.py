@@ -11,6 +11,7 @@ from ..models import Hero, OrderOfBattle
 @csrf_protect
 def hero(request, roster_id):
     user_id = user_by_roster_id.get_user_id_by_roster_id(roster_id)
+    heros = None
     if request.method == 'GET':
         try:
             oob = OrderOfBattle.objects.get(Roster_id=roster_id)

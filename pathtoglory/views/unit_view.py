@@ -22,6 +22,7 @@ def unit(request, roster_id):
         if request.user.id == user_id:
             try:
                 oob = OrderOfBattle.objects.get(Roster_id=roster_id)
+                units = list(Unit.objects.filter(OrderOfBattle=oob))
             except OrderOfBattle.DoesNotExist:
                 return redirect('order_of_battle', roster_id)
             update_request = request.POST.copy()
