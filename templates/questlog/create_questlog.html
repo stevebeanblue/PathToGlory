@@ -11,7 +11,6 @@
             {% if user.is_authenticated %}
                 <div class="col s6">
                     <h3>Create a Quest</h3>
-                    {% csrf_token %}
                     <form action = "" method = "post">
                         <p>{{ form.errors }}</p>
                         {% csrf_token %}

@@ -30,7 +30,7 @@ urlpatterns = [
     path("thevault/<int:roster_id>/", the_vault_view.the_vault, name="thevault"),
     path("editvault/<int:vault_id>/", the_vault_view.edit_vault, name="editvault"),
     path("createvault/<int:roster_id>/", the_vault_view.create_vault, name="createvault"),
-    path("deletevault/<int:vault_id>/", the_vault_view.delete_vault, name="deletevault"),
+    path("deletevault/<int:roster_id>/", the_vault_view.delete_vault, name="deletevault"),
     # endregion
     # region roster
     path("grouprosters/<int:group_id>/", rosters_view.grouprosters, name="grouprosters"),
