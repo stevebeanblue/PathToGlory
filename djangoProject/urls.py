@@ -34,7 +34,7 @@ urlpatterns = [
     # endregion
     # region roster
     path("grouprosters/<int:group_id>/", rosters_view.grouprosters, name="grouprosters"),
-    path("editroster/<int:roster_id>", rosters_view.editroster, name="editroster"),
+    path("editroster/<int:roster_id>/", rosters_view.editroster, name="editroster"),
     path("createroster/", rosters_view.createroster, name="createroster"),
     path("myrosters/", rosters_view.my_rosters, name="my_rosters"),
     path("deleteroster/<int:roster_id>", rosters_view.delete_roster, name="delete_roster"),

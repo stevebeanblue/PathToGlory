@@ -19,7 +19,7 @@
                         <p>Date Created: {{ Roster.DateCreated }}</p>
                         <p>Completed: {{ Roster.IsCompleted }}</p>
                         <p>Current Glory: {{ Roster.Glory }}</p>
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated and Roster.User_id == user.id %}
                             <a href="{% url 'editroster' Roster.pk %}">Edit</a>
                             <a href="{% url 'delete_roster' Roster.pk %}">Delete</a>
                         {% endif %}
@@ -50,8 +50,13 @@
                 <hr/>
             {% endfor %}
         {% else %}
-            <div class="container">
-                <p>There is currently no rosters</p>
+            <div class="row">
+                <div class="col s6">
+                    <p>There are currently no rosters</p>
+                    {% if user.is_authenticated%}
+                        <a href="{% url 'createroster' %}">Create</a>
+                    {% endif %}
+                </div>
             </div>
         {% endif %}
     </div>

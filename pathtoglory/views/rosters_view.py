@@ -1,8 +1,11 @@
 from datetime import datetime
 
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 
+from ..helpers import user_by_roster_id
 from ..models import Roster, PathToGloryGroup
 from ..helpers.paths import Paths
 from ..forms import CreateRosterForm
@@ -16,12 +19,15 @@ def grouprosters(request, group_id):
 
 
 @csrf_protect
+@login_required
 def my_rosters(request):
     if request.method == 'GET':
-        return render(request, Paths.group_rosters, {"Rosters": list(Roster.objects.filter(User_id=request.user.id))})
+        rosters = list(Roster.objects.filter(User_id=request.user.id))
+        return render(request, Paths.group_rosters, {"Rosters": rosters})
 
 
 @csrf_protect
+@login_required
 def createroster(request):
     if request.method == 'GET':
         form = CreateRosterForm()
@@ -42,6 +48,7 @@ def createroster(request):
 
 
 @csrf_protect
+@login_required
 def editroster(request, roster_id):
     try:
         roster = Roster.objects.get(pk=int(roster_id))
@@ -62,10 +69,13 @@ def editroster(request, roster_id):
 
 
 @csrf_protect
+@login_required
 def delete_roster(request, roster_id):
-    roster = get_object_or_404(Roster, id=roster_id)
 
-    if request.method == 'GET':
+    roster = get_object_or_404(Roster, id=roster_id)
+    user_id = user_by_roster_id.get_user_id_by_roster_id(roster_id)
+
+    if request.method == 'GET' and user_id == roster.User_id:
         roster.delete()
 
     return redirect('my_rosters')
