@@ -14,25 +14,16 @@
           <img src="{% static  'images/A_warriors_with_swords_walking_through_a_waste_land_in_a_storm_.png'%}" alt="Warriors walking in a storm">
       </div>
     </div>
-    <div class="section white">
-      <div class="row container">
-        {% if user.is_authenticated %}
-            Hi {{ user.username }}!
-            <p><a href="{% url 'logout' %}">Log Out</a></p>
-        {% else %}
-            <p>You are not logged in</p>
-            <a href="{% url 'login' %}">Log In</a>
-            <a href="{% url 'signup' %}">Sign up</a>
-        {% endif %}
-        </div>
-         <div class="section white">
-             <div class="row container">
-                <ul>
-                    {% for Group in PathToGloryGroup %}
-                        <li><a href="{% url 'grouprosters' Group.pk %}">{{ Group.Description }}</a></li>
-                    {% endfor %}
-                </ul>
-             </div>
+     <div class="section white">
+         <div class="row container">
+            <h2 class="center-align">Check out these groups with Path to Glory Rosters</h2>
+                {% for Group in PathToGloryGroup %}
+                    <div class="card-panel grey darken-3 col s12 m6 center-align z-depth-3">
+                        <span class="flow-text">
+                            <a class="white-text" href="{% url 'grouprosters' Group.pk %}">{{ Group.Description }}</a>
+                        </span>
+                    </div>
+                {% endfor %}
          </div>
-    </div>
+     </div>
 {% endblock %}

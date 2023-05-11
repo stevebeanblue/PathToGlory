@@ -35,8 +35,13 @@
                 {% else %}
                     <div class="user-view">
                         <p>You are not logged in</p>
-                        <a href="{% url 'login' %}">Log In</a>
-                        <a href="{% url 'signup' %}">Sign up</a>
+                        <a class="btn cyan waves-effect waves-light" href="{% url 'login' %}">
+                            <span style="padding-left:0.5em">Log In</span>
+                            <i style="padding-right:0.5em" class="material-icons right">lock_open</i>
+                        </a>
+                        <a class="waves-effect waves-light btn purple accent-4" href="{% url 'signup' %}">
+                            <span style="padding-left:0.5em">Sign up</span>
+                            <i style="padding-right:0.5em" class="material-icons right">send</i></a>
                     </div>
                 {% endif %}
                     <li><div class="divider"></div></li>
