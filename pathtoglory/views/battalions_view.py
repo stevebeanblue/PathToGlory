@@ -41,7 +41,7 @@ def edit_battalion(request, battalion_id):
             form = BattalionsForm(request.POST or None, instance=instance)
             if form.is_valid():
                 form.save()
-                return redirect(Paths.battalions, vault_id=battalion.Vault_Id.id)
+                return redirect('battalions', vault_id=battalion.Vault_Id.id)
 
         return render(request, Paths.edit_battalions, {"form": form})
     else:
@@ -61,4 +61,4 @@ def delete_battalion(request, battalion_id):
         if request.method == 'GET':
             battalion.delete()
 
-    return redirect(Paths.battalions, vault_id=vault_id)
+    return redirect('battalions', vault_id=vault_id)
