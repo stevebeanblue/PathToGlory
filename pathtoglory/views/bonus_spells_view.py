@@ -35,7 +35,6 @@ def bonus_spell(request, vault_id):
 def edit_bonus_spell(request, spell_id):
     spell = BonusSpells.objects.get(id=spell_id)
     form = BonusSpellsForm(instance=spell)
-
     user_id = user_by_roster_id.get_user_id_by_roster_id(spell.Roster_Id)
     if request.method == 'POST' and user_id == request.user.id:
         form = BonusSpellsForm(request.POST or None, instance=spell)
