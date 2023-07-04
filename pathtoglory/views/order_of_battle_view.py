@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
@@ -25,6 +26,7 @@ def order_of_battle(request, roster_id):
     return render(request, Paths.order_of_battle, {"form": form, "user_id": user_id, "roster_id": roster_id})
 
 
+@login_required
 @csrf_protect
 def edit_order_of_battle(request, order_of_battle_id):
     oob = get_object_or_404(OrderOfBattle, id=order_of_battle_id)
@@ -44,6 +46,7 @@ def edit_order_of_battle(request, order_of_battle_id):
         return render(request, Paths.edit_order_of_battle, {"form": form})
 
 
+@login_required
 @csrf_protect
 def create_order_of_battle(request, roster_id):
     if request.method == 'POST':
@@ -64,6 +67,7 @@ def create_order_of_battle(request, roster_id):
         return redirect(Views.home, request)
 
 
+@login_required
 @csrf_protect
 def delete_order_of_battle(request, order_of_battle_id):
     return redirect

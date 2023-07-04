@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 
@@ -37,6 +38,7 @@ def hero(request, roster_id):
     return render(request, Paths.hero, {"form": form, "user_id": user_id, "roster_id": roster_id, "heros": heros})
 
 
+@login_required
 @csrf_protect
 def edit_hero(request, hero_id):
     try:
@@ -61,6 +63,7 @@ def edit_hero(request, hero_id):
         return redirect('hero', oob.Roster_id)
 
 
+@login_required
 @csrf_protect
 def delete_hero(request, hero_id):
     if request.method == 'GET':
