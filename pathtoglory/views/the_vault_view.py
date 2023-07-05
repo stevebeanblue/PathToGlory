@@ -1,5 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.csrf import csrf_protect
 
 from ..forms import TheVaultForm
 from ..helpers import user_by_roster_id
@@ -8,8 +10,8 @@ from ..helpers.views_names import Views
 from ..models import TheVault
 
 
+@csrf_protect
 def the_vault(request, roster_id):
-
     user_id = user_by_roster_id.get_user_id_by_roster_id(roster_id)
 
     if request.method == 'GET':
@@ -27,8 +29,9 @@ def the_vault(request, roster_id):
         return redirect(Views.home)
 
 
+@login_required
+@csrf_protect
 def create_vault(request, roster_id):
-
     user_id = user_by_roster_id.get_user_id_by_roster_id(roster_id)
 
     if request.user.id == user_id:
@@ -50,8 +53,9 @@ def create_vault(request, roster_id):
         return redirect(Views.home)
 
 
+@login_required
+@csrf_protect
 def edit_vault(request, vault_id):
-
     vault = get_object_or_404(TheVault, pk=vault_id)
     user_id = user_by_roster_id.get_user_id_by_roster_id(vault.Roster_Id)
 
@@ -68,13 +72,13 @@ def edit_vault(request, vault_id):
         return redirect(Views.home)
 
 
+@login_required
+@csrf_protect
 def delete_vault(request, roster_id):
-
     user_id = user_by_roster_id.get_user_id_by_roster_id(roster_id)
 
-    if request.method == 'GET':
-        if user_id == request.user.id:
-            vault = get_object_or_404(TheVault, Roster_Id=roster_id)
-            vault.delete()
+    if request.method == 'GET' and user_id == request.user.id:
+        vault = get_object_or_404(TheVault, Roster_Id=roster_id)
+        vault.delete()
 
     return redirect('thevault', roster_id)

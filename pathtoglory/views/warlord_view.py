@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 
@@ -21,6 +22,7 @@ def warlord(request, roster_id):
     return render(request, Paths.warlord, {"form": form, "user_id": user_id, "roster_id": roster_id})
 
 
+@login_required
 @csrf_protect
 def create_warlord(request, roster_id):
     user_id = user_by_roster_id.get_user_id_by_roster_id(roster_id)
@@ -47,6 +49,7 @@ def create_warlord(request, roster_id):
     return render(request, Paths.create_warlord, {'form': form})
 
 
+@login_required
 @csrf_protect
 def edit_warlord(request, roster_id):
     user_id = user_by_roster_id.get_user_id_by_roster_id(roster_id)
@@ -70,6 +73,7 @@ def edit_warlord(request, roster_id):
         return redirect('warlord', roster_id)
 
 
+@login_required
 @csrf_protect
 def delete_warlord(request, roster_id):
     if request.method == 'GET':
