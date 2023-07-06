@@ -90,13 +90,20 @@ if DEBUG:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'pathtoglory$pathtoglory',
-                    'USER': os.environ.get('DB_USER', 'some_random_default_string'),
-                    'PASSWORD': os.environ.get('DB_PWRD', 'some_random_default_string'),
-                    'HOST': 'pathtoglory.mysql.pythonanywhere-services.com',
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+  #  DATABASES = {
+  #      'default': {
+  #          'ENGINE': 'django.db.backends.mysql',
+  #          'NAME': 'pathtoglory$pathtoglory',
+  #                  'USER': os.environ.get('DB_USER', 'some_random_default_string'),
+  #                  'PASSWORD': os.environ.get('DB_PWRD', 'some_random_default_string'),
+  #                  'HOST': 'pathtoglory.mysql.pythonanywhere-services.com',
+  #      }
+  #  }
 
 
 # Password validation
