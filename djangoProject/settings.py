@@ -144,6 +144,7 @@ USE_TZ = True
 mimetypes.add_type("text/css", ".css", True)
 mimetypes.add_type("text/html", ".js", True)
 
+
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR.joinpath('pathtoglory/static/')
