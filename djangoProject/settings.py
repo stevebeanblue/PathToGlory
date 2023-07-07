@@ -142,7 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 mimetypes.add_type("text/css", ".css", True)
-mimetypes.add_type("text/javascript", ".js", True)
+mimetypes.add_type("text/html", ".js", True)
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
