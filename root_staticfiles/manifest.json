@@ -5,12 +5,12 @@
   "scope": "./",
   "icons": [
     {
-      "src": "/pathtoglory/static/images/icons8-news-16.png",
+      "src": "",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/pathtoglory/static/images/icons8-news-16.png",
+      "src": "",
       "sizes": "512x512",
       "type": "image/png"
     }
