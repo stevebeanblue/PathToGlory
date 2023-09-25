@@ -102,6 +102,8 @@ urlpatterns = [
          name="edit_order_of_battle"),
     path("createorderofbattle/<int:roster_id>", order_of_battle_view.create_order_of_battle, \
          name="create_order_of_battle"),
+    path("order_of_battle_summary/<int:roster_id>", order_of_battle_view.order_of_battle_summary, \
+         name="order_of_battle_summary"),
     # endregion
     # region warlord
     path("warlord/<int:roster_id>", warlord_view.warlord, name="warlord"),

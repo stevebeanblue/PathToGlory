@@ -51,6 +51,7 @@ class Paths:
     order_of_battle = "orderofbattle/order_of_battle.html"
     create_order_of_battle = "orderofbattle/create_OrderOfBattle.html"
     edit_order_of_battle = "orderofbattle/edit_OrderOfBattle.html"
+    order_of_battle_summary = "orderofbattle/summary_OrderOfBattle.html"
     # endregion
     # region warlord
     warlord = "warlord/warlord.html"

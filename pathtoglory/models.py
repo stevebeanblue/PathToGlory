@@ -173,3 +173,4 @@ class Unit(models.Model):
     CasualtyScore = models.IntegerField(default=0)
     RenownPoints = models.IntegerField(default=0)
     Points = models.IntegerField(default=0)
+

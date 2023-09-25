@@ -7,7 +7,7 @@ from ..forms import OrderOfBattleForm
 from ..helpers import user_by_roster_id
 from ..helpers.paths import Paths
 from ..helpers.views_names import Views
-from ..models import OrderOfBattle
+from ..models import OrderOfBattle, Warlord, Hero, Unit, EndlessSpellsAndInvocations
 
 
 @csrf_protect
@@ -24,6 +24,25 @@ def order_of_battle(request, roster_id):
         form = OrderOfBattleForm(instance=oob)
 
     return render(request, Paths.order_of_battle, {"form": form, "user_id": user_id, "roster_id": roster_id})
+
+@csrf_protect
+def order_of_battle_summary(request, roster_id):
+    if request.method == 'GET':
+        try:
+            oob = OrderOfBattle.objects.get(Roster_id=roster_id)
+            war_lord = Warlord.objects.get(OrderOfBattle=oob)
+            heros = Hero.objects.filter(OrderOfBattle=oob)
+            units = Unit.objects.filter(OrderOfBattle=oob)
+            endless_spells_and_invocations = EndlessSpellsAndInvocations.objects.filter(Roster_Id=roster_id)
+
+        except OrderOfBattle.DoesNotExist:
+            war_lord = None
+            heros = None
+            units = None
+            endless_spells_and_invocations = None
+
+    return render(request, Paths.order_of_battle_summary, {"war_lord": war_lord, "heros": heros, "units": units,\
+                                                           "endless_spells_and_invocations": endless_spells_and_invocations})
 
 
 @login_required

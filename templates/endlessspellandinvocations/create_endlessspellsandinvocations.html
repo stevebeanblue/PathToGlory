@@ -24,7 +24,7 @@
                     <ul class="collapsible popout">
                         {% for item in vault_item %}
                             <li>
-                              <div class="collapsible-header"><i class="material-icons">wb_iridescent</i>Prayer: {{ item.Name }}</div>
+                              <div class="collapsible-header"><i class="material-icons">wb_iridescent</i>Name: {{ item.Name }}</div>
                               <div class="collapsible-body">
                                   {% if user.is_authenticated %}
                                     <span><a href="{% url 'edit_endless_spells_and_invocations' item.pk %}">Edit</a></span>

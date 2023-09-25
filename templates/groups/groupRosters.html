@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container">
         <h2>Rosters</h2>
-        <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
+        <a href="{% url 'home' %}"><i class="material-icons">keyboard_backspace</i></a>
         {% if Rosters %}
             {% for Roster in Rosters %}
                 <div class="row">
@@ -44,6 +44,10 @@
                         <p>
                             <i class="material-icons">featured_play_list</i>
                             <a href="{% url 'order_of_battle' Roster.pk %}">Order of battle</a>
+                        </p>
+                        <p>
+                            <i class="material-icons">subject</i>
+                            <a href="{% url 'order_of_battle_summary' Roster.pk %}">Order of battle summary</a>
                         </p>
                     </div>
                 </div>

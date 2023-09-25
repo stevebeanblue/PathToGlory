@@ -1,0 +1,72 @@
+{% extends "shared/layout.html" %}
+{% load material_form %}
+{% block title %}
+    Order of battle Summary
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Order of battle summary</h2>
+        <a href="{% url 'my_rosters' %}"><i class="material-icons">keyboard_backspace</i></a>
+        {% if war_lord %}
+            <div class="col s12">
+                <blockquote>
+                    Warlord
+                </blockquote>
+                <ul class="collapsible popout">
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">group</i>{{ war_lord.Name }}</div>
+                        <div class="collapsible-body">
+                            <p>Warscroll: {{ war_lord.Warscroll }}</p>
+                        </div>
+                    </li>
+                </ul>
+                </div>
+                <div class="col s12">
+                    <blockquote>
+                        Hero
+                    </blockquote>
+                    <ul class="collapsible popout">
+                        {% for hero in heros %}
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">group</i>{{ hero.Name }}</div>
+                                <div class="collapsible-body">
+                                    <p>Warscroll: {{ hero.Warscroll }}</p>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col s12">
+                    <blockquote>
+                        Units
+                    </blockquote>
+                    <ul class="collapsible popout">
+                        {% for unit in units %}
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">group</i>{{ unit.Name }}</div>
+                                <div class="collapsible-body">
+                                    <p>Warscroll: {{ unit.Warscroll }}</p>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            <div class="col s12">
+                <blockquote>
+                    EndlessSpells/Invocations
+                </blockquote>
+                <ul>
+                    {% for endless_spells_and_invocation in endless_spells_and_invocations %}
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">wb_iridescent</i>
+                                {{ endless_spells_and_invocation.Name }}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p>No order of battle has been added to this roster.</p>
+        {% endif %}
+    </div>
+{% endblock %}
