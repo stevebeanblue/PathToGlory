@@ -37,7 +37,7 @@ def createquestlog(request, roster_id):
 @csrf_protect
 def edit_quest_log(request, quest_id):
     quest = get_object_or_404(QuestLog, id=quest_id)
-    user_id = user_by_roster_id.get_user_id_by_roster_id(quest.Roster_Id)
+    user_id = user_by_roster_id.get_user_id_by_roster_id(quest.RosterId)
     if user_id == request.user.id:
         form = QuestLogForm(instance=quest)
         if request.method == 'POST':
