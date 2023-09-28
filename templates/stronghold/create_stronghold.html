@@ -1,16 +1,16 @@
 {% extends "shared/layout.html" %}
 {% load material_form %}
 {% block title %}
-    Create a Stronghold
+    Create a Territory
 {% endblock %}
 {% block content %}
     <div class="container">
-        <h2>Strongholds</h2>
+        <h2>Territories</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
         <div class="row">
         {% if user.is_authenticated %}
             <div class="col s6">
-                <h3>Create a Stronghold</h3>
+                <h3>Create a Stronghold Territory</h3>
                 <form action = "" method = "post">
                     <p>{{ form.errors }}</p>
                     {% csrf_token %}
@@ -22,16 +22,18 @@
             </div>
         {% endif %}
         <div class="col s6 right-align">
-            <h3>Strongholds</h3>
+            <h3>Stronghold Territories</h3>
             {% if strongholds %}
                 <ul class="collapsible popout">
                     {% for stronghold in strongholds %}
                         <li>
-                          <div class="collapsible-header"><i class="material-icons">account_balance</i>Stronghold Name: {{ stronghold.Name }}</div>
+                          <div class="collapsible-header"><i class="material-icons">account_balance</i>Name: {{ stronghold.Name }}</div>
                           <div class="collapsible-body">
-                              <span><p>Stronghold Barracks: {{ stronghold.Barracks }}</p></span>
-                              <span><p>Stronghold Imposing: {{ stronghold.Imposing }}</p></span>
-                              <span><p>Stronghold Mighty: {{ stronghold.Mighty }}</p></span>
+                              <span><p>Barracks: {{ stronghold.Barracks }}</p></span>
+                              <span><p>Imposing: {{ stronghold.Imposing }}</p></span>
+                              <span><p>Mighty: {{ stronghold.Mighty }}</p></span>
+                              <span><p>Upgraded: {{ stronghold.Upgraded }}</p></span>
+                              <span><p>Notes: {{ stronghold.Notes }}</p></span>
                               {% if user.is_authenticated %}
                                 <span><a href="{% url 'editstronghold' stronghold.pk %}">Edit</a></span>
                                 <span><a href="{% url 'deletestronghold' stronghold.pk %}">Delete</a></span>

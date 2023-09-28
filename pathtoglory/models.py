@@ -19,9 +19,11 @@ class QuestLog(models.Model):
 class Stronghold(models.Model):
     RosterId = models.IntegerField(default=0)
     Name = models.TextField()
+    Notes = models.TextField(default="")
     Barracks = models.TextField()
     Imposing = models.BooleanField(default=False)
     Mighty = models.BooleanField(default=False)
+    Upgraded = models.BooleanField(default=False)
 
 
 class TheVault(models.Model):
@@ -67,27 +69,6 @@ class Battalions(models.Model):
     Vault_Id = models.ForeignKey(TheVault, related_name='Battalions', on_delete=models.CASCADE, default=0)
 
 
-class StrongholdTerritories(models.Model):
-    TerritoriesId = models.IntegerField(default=0)
-    Name = models.TextField()
-    TerritoryType = models.TextField()
-    Upgraded = models.BooleanField(default=False)
-
-
-class ImposingStrongHoldTerritories(models.Model):
-    TerritoriesId = models.IntegerField(default=0)
-    Name = models.TextField()
-    TerritoryType = models.TextField()
-    Upgraded = models.BooleanField(default=False)
-
-
-class MightyStrongholdTerritories(models.Model):
-    TerritoriesId = models.IntegerField(default=0)
-    Name = models.TextField()
-    TerritoryType = models.TextField()
-    Upgraded = models.BooleanField(default=False)
-
-
 class Roster(models.Model):
     Group_id = models.ForeignKey(
         PathToGloryGroup,
@@ -112,22 +93,6 @@ class Achievements(models.Model):
     QuestCompleted = models.IntegerField(default=0)
     VictoriesWon = models.IntegerField(default=0)
     EnemyHereosSlain = models.IntegerField(default=0)
-
-
-class Territories(models.Model):
-    RosterId = models.IntegerField(default=0)
-    StrongholdTerritories = models.ForeignKey(
-        StrongholdTerritories,
-        on_delete=models.CASCADE
-    )
-    ImposingStrongHoldTerritories = models.ForeignKey(
-        ImposingStrongHoldTerritories,
-        on_delete=models.CASCADE
-    )
-    MightyStrongholdTerritories = models.ForeignKey(
-        MightyStrongholdTerritories,
-        on_delete=models.CASCADE
-    )
 
 
 class OrderOfBattle(models.Model):
@@ -173,4 +138,3 @@ class Unit(models.Model):
     CasualtyScore = models.IntegerField(default=0)
     RenownPoints = models.IntegerField(default=0)
     Points = models.IntegerField(default=0)
-

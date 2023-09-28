@@ -56,9 +56,11 @@ class StrongholdForm(ModelForm):
         fields = {
             'RosterId',
             'Name',
+            'Notes',
             'Barracks',
             'Imposing',
             'Mighty',
+            'Upgraded',
         }
         widgets = {
             'RosterId': forms.HiddenInput(),
