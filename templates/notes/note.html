@@ -1,0 +1,25 @@
+<div class="col s12">
+    <blockquote>
+        {{ type_of_note }} notes
+    </blockquote>
+    {% if notes %}
+        {% for note in notes %}
+            <ul class="collapsible">
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">speaker_notes</i>
+                      {{ note.title }}
+                  </div>
+                  <div class="collapsible-body">
+                      <span>{{note.note}}</span>
+                      <hr/>
+                        <span><a href="{% url 'edit' note.pk %}">Edit</a></span>
+                        <span><a href="{% url 'delete' note.pk %}">Delete</a></span>
+                  </div>
+                </li>
+            </ul>
+            <hr/>
+        {% endfor %}
+    {% else %}
+        <p>There are no <b>{{ type_of_note }}</b> notes</p>
+    {% endif %}
+</div>

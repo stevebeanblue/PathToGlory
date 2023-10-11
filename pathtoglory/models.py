@@ -138,3 +138,14 @@ class Unit(models.Model):
     CasualtyScore = models.IntegerField(default=0)
     RenownPoints = models.IntegerField(default=0)
     Points = models.IntegerField(default=0)
+
+
+class Notes(models.Model):
+    Roster_Id = models.IntegerField(default=0)
+    hero_phase = models.BooleanField(default=False)
+    movement_phase = models.BooleanField(default=False)
+    shooting_phase = models.BooleanField(default=False)
+    combat_phase = models.BooleanField(default=False)
+    general = models.BooleanField(default=False)
+    note = models.TextField()
+    title = models.CharField(max_length=250)

@@ -66,3 +66,7 @@ class Paths:
     unit = "units/unit.html"
     edit_unit = "units/edit_unit.html"
     # endregion
+    # region notes
+    notes = "notes/notes.html"
+    edit_note = "notes/edit_note.html"
+    # endregion

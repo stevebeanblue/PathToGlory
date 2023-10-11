@@ -1,0 +1,33 @@
+{% extends "shared/layout.html" %}
+{% load material_form %}
+{% block title %}
+    {% if edit %}
+        Edit a note
+    {% else %}
+        Create a note
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Note</h2>
+        <h2>{{ p }}</h2>
+        <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
+        <div class="row">
+            {% if edit %}
+                <h3>Edit a Note</h3>
+            {% else %}
+                <h3>Create a Note</h3>
+            {% endif %}
+            <div class="col s12">
+                <form action = "" method = "post">
+                    <p>{{ form.errors }}</p>
+                    {% csrf_token %}
+                    {% form form=form %}{% endform %}
+                    <button class="btn waves-effect waves-light black" type="submit" name="Save">Save
+                        <i class="material-icons right">save</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

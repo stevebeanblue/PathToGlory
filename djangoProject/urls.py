@@ -19,7 +19,7 @@ from pathtoglory.views \
     import achievements_view, home_view, rosters_view, questlog_view, stronghold_view, \
     bonus_artifacts_of_power_view, the_vault_view, bonus_unique_enhancement_view, bonus_spells_view, \
     bonus_prayers_view, endless_spells_and_invocations_view, battalions_view, order_of_battle_view, \
-    warlord_view, hero_view, unit_view
+    warlord_view, hero_view, unit_view, notes_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -119,6 +119,12 @@ urlpatterns = [
     # region units
     path("unit/<int:roster_id>", unit_view.unit, name="unit"),
     path("editunit/<int:unit_id>", unit_view.edit_unit, name="edit_unit"),
-    path("deleteunit/<int:unit_id>", unit_view.delete_unit, name="delete_unit")
+    path("deleteunit/<int:unit_id>", unit_view.delete_unit, name="delete_unit"),
     # endregion
+    # region notes
+    path("notes/<int:roster_id>", notes_view.notes, name="notes"),
+    path("edit_note/<int:note_id>", notes_view.edit_note, name="edit"),
+    path("delete_note/<int:note_id>", notes_view.delete_note, name="delete"),
+    path("create/<int:roster_id>", notes_view.create_note, name="create")
+    # end region
 ]
