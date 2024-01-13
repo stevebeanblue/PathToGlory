@@ -62,7 +62,7 @@
               </div>
         </header>
     <main>
-        <div class="container">
+        <div>
             <h1 class="header flow-text">{% block pageheader %}{% endblock %}</h1>
                 <div class="fixed-action-btn">
                     <a class="btn-floating btn-large black sidenav-trigger" data-target="slide-out">
@@ -117,10 +117,13 @@
           }
           @media screen and (max-width: 440px) {
             #navHeader {
-                height:17em !important;
+                height:4em !important;
             }
             #checklistHeading{
                 padding-top: 10em !important;
+            }
+            .brand-logo {
+                font-size: 1.3em !important
             }
           }
           .flex-container{

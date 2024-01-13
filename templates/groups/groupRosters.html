@@ -25,10 +25,12 @@
                         {% endif %}
                     </div>
                     <div class="col s6 right-align">
-                        <p>
-                            <i class="material-icons">speaker_notes</i>
-                            <a href="{% url 'notes' Roster.pk %}">Notes</a>
-                        </p>
+                        {% if user.is_authenticated and Roster.User_id == user.id %}
+                            <p>
+                                <i class="material-icons">speaker_notes</i>
+                                <a href="{% url 'notes' Roster.pk %}">Notes</a>
+                            </p>
+                        {% endif %}
                         <p>
                             <i class="material-icons">explore</i>
                             <a href="{% url 'createquestlog' Roster.pk %}">Quest Log</a>
