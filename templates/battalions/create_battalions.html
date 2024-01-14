@@ -10,6 +10,7 @@
         <div class="flex-container">
             {% if user.is_authenticated %}
                 <div>
+                    <h3 class="mobileHeading">Create a Battalion</h3>
                     <form method = "post">
                         {% csrf_token %}
                         {% form form=form %}{% endform %}
@@ -21,6 +22,7 @@
             {% endif %}
             <div>
                 {% if vault_item %}
+                    <h3 class="mobileHeading"> Current Battalions</h3>
                     <ul class="collapsible popout">
                         {% for item in vault_item %}
                             <li>

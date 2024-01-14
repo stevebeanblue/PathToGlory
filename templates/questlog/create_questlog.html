@@ -7,10 +7,10 @@
     <div class="container">
         <h2>Quest Log</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
-        <div class="row">
+        <div class="flex-container">
             {% if user.is_authenticated %}
-                <div class="col s6">
-                    <h3>Create a Quest</h3>
+                <div>
+                    <h3 class="mobileHeading">Create a Quest</h3>
                     <form action = "" method = "post">
                         <p>{{ form.errors }}</p>
                         {% csrf_token %}
@@ -21,9 +21,9 @@
                     </form>
                 </div>
             {% endif %}
-            <div class="col s6 right-align">
-                <h3>Quests</h3>
+            <div class="right-align">
                 {% if quests %}
+                    <h3 class="mobileHeading">Current Quests</h3>
                     <ul class="collapsible popout">
                         {% for quest in quests %}
                             <li>
