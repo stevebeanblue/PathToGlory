@@ -8,43 +8,47 @@
         <h2>Territories</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
         <div class="flex-container">
-        {% if user.is_authenticated %}
-            <div>
-                <h3 class="mobileHeading">Create a Stronghold Territory</h3>
-                <form action = "" method = "post">
-                    <p>{{ form.errors }}</p>
-                    {% csrf_token %}
-                    {% form form=form %}{% endform %}
-                        <button class="btn waves-effect waves-light black" type="submit" name="Create">Create
-                            <i class="material-icons right">create</i>
-                        </button>
-                </form>
-            </div>
-        {% endif %}
-        <div class="right-align">
-            {% if strongholds %}
-                <h3 class="mobileHeading">Current Stronghold Territories</h3>
-                <ul class="collapsible popout">
-                    {% for stronghold in strongholds %}
-                        <li>
-                          <div class="collapsible-header"><i class="material-icons">account_balance</i>Name: {{ stronghold.Name }}</div>
-                          <div class="collapsible-body">
-                              <span><p>Barracks: {{ stronghold.Barracks }}</p></span>
-                              <span><p>Imposing: {{ stronghold.Imposing }}</p></span>
-                              <span><p>Mighty: {{ stronghold.Mighty }}</p></span>
-                              <span><p>Upgraded: {{ stronghold.Upgraded }}</p></span>
-                              <span><p>Notes: {{ stronghold.Notes }}</p></span>
-                              {% if user.is_authenticated %}
-                                <span><a href="{% url 'editstronghold' stronghold.pk %}">Edit</a></span>
-                                <span><a href="{% url 'deletestronghold' stronghold.pk %}">Delete</a></span>
-                              {% endif %}
-                          </div>
-                        </li>
-                    {% endfor %}
-                  </ul>
-            {% else %}
-                <p>You currently have no strongholds</p>
+            {% if user.is_authenticated %}
+                <div>
+                    <h3 class="mobileHeading">Create a Stronghold Territory</h3>
+                    <form action = "" method = "post">
+                        <p>{{ form.errors }}</p>
+                        {% csrf_token %}
+                        {% form form=form %}{% endform %}
+                            <button class="btn waves-effect waves-light black" type="submit" name="Create">Create
+                                <i class="material-icons right">create</i>
+                            </button>
+                    </form>
+                </div>
             {% endif %}
+            <div class="right-align">
+                {% if strongholds %}
+                    <h3 class="mobileHeading">Current Stronghold Territories</h3>
+                    <ul class="collapsible popout">
+                        {% for stronghold in strongholds %}
+                            <li>
+                              <div class="collapsible-header">
+                                  <i class="material-icons">account_balance</i>
+                                  Name: {{ stronghold.Name }}
+                              </div>
+                              <div class="collapsible-body">
+                                  <span><p>Barracks: {{ stronghold.Barracks }}</p></span>
+                                  <span><p>Imposing: {{ stronghold.Imposing }}</p></span>
+                                  <span><p>Mighty: {{ stronghold.Mighty }}</p></span>
+                                  <span><p>Upgraded: {{ stronghold.Upgraded }}</p></span>
+                                  <span><p>Notes: {{ stronghold.Notes }}</p></span>
+                                  {% if user.is_authenticated %}
+                                    <span><a href="{% url 'editstronghold' stronghold.pk %}">Edit</a></span>
+                                    <span><a href="{% url 'deletestronghold' stronghold.pk %}">Delete</a></span>
+                                  {% endif %}
+                              </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>You currently have no strongholds</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}
