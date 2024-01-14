@@ -7,9 +7,9 @@
     <div class="container">
         <h2>Bonus artifacts of power</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
-        <div class="row">
+        <div class="flex-container">
             {% if user.is_authenticated %}
-                <div class="col s6">
+                <div>
                     <form method = "post">
                         {% csrf_token %}
                         {% form form=form %}{% endform %}
@@ -19,11 +19,11 @@
                     </form>
                 </div>
             {% endif %}
-            <div class="col s6">
+            <div>
                 {% if vault_item %}
                     <ul class="collapsible popout">
                         {% for item in vault_item %}
-                            <li>
+                            <li class="mobileNoMarginLeft">
                               <div class="collapsible-header"><i class="material-icons">power</i>Artifact of power: {{ item.Name }}</div>
                               <div class="collapsible-body">
                                   {% if user.is_authenticated %}
