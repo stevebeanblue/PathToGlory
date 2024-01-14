@@ -7,9 +7,9 @@
     <div class="container">
         <h2>Units</h2>
         <a href="#" onclick="history.back()"><i class="material-icons">keyboard_backspace</i></a>
-        <div class="row">
+        <div class="flex-container">
             {% if user.is_authenticated and user.id == user_id  %}
-                <div class="col s6">
+                <div>
                     <p>{{ form.errors }}</p>
                     <form method="post">
                         {% csrf_token %}
@@ -20,11 +20,11 @@
                     </form>
                 </div>
             {% endif %}
-            <div class="col s6">
+            <div>
                 {% if units %}
                     <ul class="collapsible popout">
                         {% for unit in units %}
-                            <li>
+                            <li class="mobileNoMarginLeft">
                               <div class="collapsible-header"><i class="material-icons">group</i>Unit: {{ unit.Name }}</div>
                               <div class="collapsible-body">
                                   <p>Warscroll: {{ unit.Warscroll }}</p>
