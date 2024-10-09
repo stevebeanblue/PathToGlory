@@ -2,7 +2,7 @@ asgiref==3.5.2
 backports.zoneinfo;python_version>="3.9"
 certifi==2024.7.4
 distlib==0.3.6
-Django==4.1.13
+Django==4.2.16
 django-material==1.10.0
 filelock==3.8.0
 pipenv==2022.9.24
